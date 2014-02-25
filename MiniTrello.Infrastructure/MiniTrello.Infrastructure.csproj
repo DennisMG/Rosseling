@@ -139,6 +139,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MiniTrello.Data\MiniTrello.Data.csproj">
+      <Project>{A854B59C-A908-4926-8CC5-FB4277F3B4DB}</Project>
+      <Name>MiniTrello.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
