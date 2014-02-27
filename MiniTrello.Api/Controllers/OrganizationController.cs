@@ -44,7 +44,7 @@ namespace MiniTrello.Api.Controllers
          }
 
         [POST("organization/addorganization/{accessToken}")]
-        public HttpResponseMessage AddNewOrganization([FromBody] OrganizationModel model, string accessToken)
+        public OrganizationModel AddNewOrganization([FromBody] OrganizationModel model, string accessToken)
         {
             var newOrganization = _mappingEngine.Map<OrganizationModel, Organization>(model);
             var session = _readOnlyRepository.First<Sessions>(session1 => session1.Token == accessToken);
@@ -53,7 +53,7 @@ namespace MiniTrello.Api.Controllers
             session.User.AddOrganization(newOrganization);
             var organizationCreated = _writeOnlyRepository.Create(newOrganization);
 
-            return new HttpResponseMessage(HttpStatusCode.Accepted);
+            return new OrganizationModel{Description = organizationCreated.Description,Name = organizationCreated.Name};
         }
 
 

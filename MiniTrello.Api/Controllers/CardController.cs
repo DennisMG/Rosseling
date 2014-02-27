@@ -27,7 +27,7 @@ namespace MiniTrello.Api.Controllers
         }
 
         [POST("card/addcard/{LaneId}/{token}")]
-        public HttpResponseMessage AddNewCard([FromBody] CardModel model, string token, long LaneId)
+        public CardModel AddNewCard([FromBody] CardModel model, string token, long LaneId)
         {
             var session = NewValidSession(token);
             var Lane = _readOnlyRepository.GetById<Lane>(LaneId);
@@ -37,7 +37,7 @@ namespace MiniTrello.Api.Controllers
             var newCard = new Card {Content = model.Content};
             Lane.AddCard(newCard);
             var CardCreated = _writeOnlyRepository.Create(newCard);
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            return new CardModel {Content = CardCreated.Content};
         }
 
         [AcceptVerbs(new[] { "DELETE" })]

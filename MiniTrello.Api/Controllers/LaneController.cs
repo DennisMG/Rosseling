@@ -29,7 +29,7 @@ namespace MiniTrello.Api.Controllers
         }
 
         [POST("lane/createlane/{BoardId}/{token}")]
-        public HttpResponseMessage CreateNewLane([FromBody] LaneModel model,string token,long BoardId)
+        public LaneModel CreateNewLane([FromBody] LaneModel model,string token,long BoardId)
         {
             var session = NewValidSession(token);
             ValidateSession(session);
@@ -37,9 +37,9 @@ namespace MiniTrello.Api.Controllers
             VerifyAdministrator(session.User, board.Administrator);
             var newLane = new Lane{ Name = model.Name};
             board.AddLane(newLane);
-            var LaneCreated = _writeOnlyRepository.Create(newLane);
-            if (LaneCreated != null)
-                return new HttpResponseMessage(HttpStatusCode.OK);
+            var laneCreated = _writeOnlyRepository.Create(newLane);
+            if (laneCreated != null)
+                return new LaneModel{Name = laneCreated.Name};
             throw new BadRequestException("Failed creating new lane") ;
         }
 

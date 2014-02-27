@@ -55,7 +55,7 @@ namespace MiniTrello.Api.Controllers
         }
 
         [POST("register")]
-        public AccountRegisterModel Register([FromBody] AccountRegisterModel model)
+        public HttpResponseMessage Register([FromBody] AccountRegisterModel model)
         {
             Account accountCreated = null;
             if (PasswordIsValid(model.Password, model.ConfirmPassword) && EmailIsValid(model.Email))
@@ -67,7 +67,7 @@ namespace MiniTrello.Api.Controllers
             
             if (accountCreated != null)
             {
-                return model;
+                return new HttpResponseMessage(HttpStatusCode.Created);
             }
             throw new BadRequestException("Hubo un error al guardar el usuario");
         }
