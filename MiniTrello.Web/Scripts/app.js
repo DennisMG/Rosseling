@@ -14,25 +14,31 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
             .state('home', {
                 url: '/',
                 templateUrl: '/views/index',
-                controller: 'HomeCtrl'
+                controller: 'LoginController'
 
             })
             .state('about', {
                 url: '/about',
                 templateUrl: '/views/about',
-                controller: 'AboutCtrl'
+                controller: 'registerController'
             })
             .state('login', {
                 url: '/login',
                 layout: 'basic',
-                templateUrl: '/views/login',
-                controller: 'LoginCtrl'
+                templateUrl: '/views/index',
+                controller: 'LoginController'
             })
             .state('otherwise', {
                 url: '*path',
                 templateUrl: '/views/404',
                 controller: 'Error404Ctrl'
-            });
+            })
+
+            .state('register', {
+            url: '/register',
+            templateUrl: '/views/register',
+            controller: 'registerController'
+        });
 
         $locationProvider.html5Mode(true);
 
