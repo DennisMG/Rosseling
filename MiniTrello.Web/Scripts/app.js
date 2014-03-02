@@ -17,9 +17,9 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
                 controller: 'LoginController'
 
             })
-            .state('about', {
-                url: '/about',
-                templateUrl: '/views/about',
+            .state('register', {
+                url: '/register',
+                templateUrl: '/views/register',
                 controller: 'registerController'
             })
             .state('login', {
@@ -32,13 +32,9 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
                 url: '*path',
                 templateUrl: '/views/404',
                 controller: 'Error404Ctrl'
-            })
+            });
 
-            .state('register', {
-            url: '/register',
-            templateUrl: '/views/register',
-            controller: 'registerController'
-        });
+            
 
         $locationProvider.html5Mode(true);
 
