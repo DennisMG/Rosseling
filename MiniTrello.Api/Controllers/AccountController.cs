@@ -12,7 +12,7 @@ using AutoMapper;
 using MiniTrello.Api.Models;
 using MiniTrello.Domain.Entities;
 using MiniTrello.Domain.Services;
-
+using RestSharp;
 using Session = System.Web.Providers.Entities.Session;
 
 namespace MiniTrello.Api.Controllers
@@ -30,6 +30,26 @@ namespace MiniTrello.Api.Controllers
             _writeOnlyRepository = writeOnlyRepository;
             _mappingEngine = mappingEngine;
         }
+
+        public static IRestResponse SendSimpleMessage()
+        {
+            RestClient client = new RestClient();
+            client.BaseUrl = "https://api.mailgun.net/";
+            client.Authenticator =
+                    new HttpBasicAuthenticator("api",
+                                               "key-89xsy3bheqe8e3qa3tg0m5i81s27pk96");
+            RestRequest request = new RestRequest();
+            request.AddParameter("domain",
+                                 "app17493.mailgun.org", ParameterType.UrlSegment);
+            request.Resource = "{domain}/messages";
+            request.AddParameter("from", "Administrator <me@samples.mailgun.org>");
+            request.AddParameter("to", "dennismolina.17@gmail.com");
+            request.AddParameter("subject", "Hello");
+            request.AddParameter("text", "Testing some Mailgun awesomness!");
+            request.Method = Method.POST;
+            return client.Execute(request);
+        }
+
 
         [HttpPost]
         [POST("login")]
@@ -68,6 +88,7 @@ namespace MiniTrello.Api.Controllers
             
             if (accountCreated != null)
             {
+                SendSimpleMessage();
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             throw new BadRequestException("Hubo un error al guardar el usuario");

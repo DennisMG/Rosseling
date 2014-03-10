@@ -24,11 +24,14 @@ angular.module('app.controllers', [])
             });
         }
     ])
+
     .controller('AccountController', [
-        '$scope', '$location', '$window', 'AccountServices', function($scope, $location, $window, AccountServices) {
+        '$scope', '$location', '$window', 'AccountServices', 'rcMailgun', function ($scope, $location, $window, AccountServices, rcMailgun) {
 
             $scope.hasError = false;
             $scope.errorMessage = '';
+
+           
 
             $scope.isLogged = function() {
                 return $window.sessionStorage.token != null;
@@ -75,6 +78,7 @@ angular.module('app.controllers', [])
                     .success(function(data, status, headers, config) {
                         console.log(data);
                         $scope.goToLogin();
+                        
                     })
                     .error(function(data, status, headers, config) {
                         console.log(data);
