@@ -42,10 +42,10 @@ namespace MiniTrello.Api.Controllers
             request.AddParameter("domain",
                                  "app17493.mailgun.org", ParameterType.UrlSegment);
             request.Resource = "{domain}/messages";
-            request.AddParameter("from", "Administrator <me@samples.mailgun.org>");
+            request.AddParameter("from", "MinitrelloBot <me@samples.mailgun.org>");
             request.AddParameter("to", mail);
-            request.AddParameter("subject", "Hello");
-            request.AddParameter("text", "Testing some Mailgun awesomness!");
+            request.AddParameter("subject", "Welcome to MiniTrello");
+            request.AddParameter("text", "Hi there, I'm happy that you decide to join our MiniTrello community. :)");
             request.Method = Method.POST;
             return client.Execute(request);
         }
