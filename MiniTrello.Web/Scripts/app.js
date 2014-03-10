@@ -14,19 +14,15 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
             .state('home', {
                 url: '/',
                 templateUrl: '/views/index',
-                controller: 'LoginController'
+                controller: 'AccountController'
 
             })
-            .state('register', {
-                url: '/register',
-                templateUrl: '/views/register',
-                controller: 'registerController'
-            })
+            
             .state('login', {
                 url: '/login',
                 layout: 'basic',
                 templateUrl: '/views/index',
-                controller: 'LoginController'
+                controller: 'AccountController'
             })
             .state('otherwise', {
                 url: '*path',

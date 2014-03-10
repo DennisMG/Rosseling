@@ -15,31 +15,6 @@ angular.module('app.controllers', [])
         }
     ])
 
-    // Path: /about
-    .controller('AboutCtrl', [
-        '$scope', '$location', '$window', function($scope, $location, $window) {
-            $scope.$root.title = 'AngularJS SPA | About';
-            $scope.$on('$viewContentLoaded', function() {
-                $window.ga('send', 'pageview', { 'page': $location.path(), 'title': $scope.$root.title });
-            });
-        }
-    ])
-
-    // Path: /login
-    .controller('LoginCtrl', [
-        '$scope', '$location', '$window',  function($scope, $location, $window) {
-            $scope.$root.title = 'AngularJS SPA | Sign In';
-            // TODO: Authorize a user
-            $scope.login = function() {
-                $location.path('/');
-                return false;
-            };
-            $scope.$on('$viewContentLoaded', function() {
-                $window.ga('send', 'pageview', { 'page': $location.path(), 'title': $scope.$root.title });
-            });
-        }
-    ])
-
     // Path: /error/404
     .controller('Error404Ctrl', [
         '$scope', '$location', '$window', function($scope, $location, $window) {
@@ -49,173 +24,67 @@ angular.module('app.controllers', [])
             });
         }
     ])
+    .controller('AccountController', [
+        '$scope', '$location', '$window', 'AccountServices', function($scope, $location, $window, AccountServices) {
 
-    //Path: /login
-    .controller('LoginController', [
-        '$scope', '$location', '$window', 'AccountServices', function ($scope, $location, $window, AccountServices) {
-            $('.button-checkbox').each(function () {
-                var $widget = $(this),
-                    $button = $widget.find('button'),
-                    $checkbox = $widget.find('input:checkbox'),
-                    color = $button.data('color'),
-                    settings = {
-                        on: {
-                            icon: 'glyphicon glyphicon-check'
-                        },
-                        off: {
-                            icon: 'glyphicon glyphicon-unchecked'
-                        }
-                    };
+            $scope.hasError = false;
+            $scope.errorMessage = '';
 
-                $button.on('click', function () {
-                    $checkbox.prop('checked', !$checkbox.is(':checked'));
-                    $checkbox.triggerHandler('change');
-                    updateDisplay();
-                });
+            $scope.isLogged = function() {
+                return $window.sessionStorage.token != null;
+            };
 
-                $checkbox.on('change', function () {
-                    updateDisplay();
-                });
+            $scope.loginModel = { Email: '', Password: '' };
 
-                function updateDisplay() {
-                    var isChecked = $checkbox.is(':checked');
-                    // Set the button's state
-                    $button.data('state', (isChecked) ? "on" : "off");
-
-                    // Set the button's icon
-                    $button.find('.state-icon')
-                        .removeClass()
-                        .addClass('state-icon ' + settings[$button.data('state')].icon);
-
-                    // Update the button's color
-                    if (isChecked) {
-                        $button
-                            .removeClass('btn-default')
-                            .addClass('btn-' + color + ' active');
-                    }
-                    else {
-                        $button
-                            .removeClass('btn-' + color + ' active')
-                            .addClass('btn-default');
-                    }
-                }
-                function init() {
-                    updateDisplay();
-                    // Inject the icon if applicable
-                    if ($button.find('.state-icon').length == 0) {
-                        $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
-                    }
-                }
-                init();
-            });
+            $scope.registerModel = { Email: '', Password: '', FirstName: '', LastName: '', ConfirmPassword: '' };
 
             
+            $scope.login = function() {
+                console.log($scope.loginModel);
+                AccountServices
+                    .login($scope.loginModel)
+                    .success(function(data, status, headers, config) {
 
-            $scope.email = "";
+                        $window.sessionStorage.token = data.Token;
+                        //$location.path('/boards');
+                    })
+                    .error(function(data, status, headers, config) {
+                        // Erase the token if the user fails to log in
+                        delete $window.sessionStorage.token;
 
-            $scope.password = "";
-
-            // TODO: Authorize a user
-            $scope.login = function () {
-                var model = { Email: $scope.email, Password: $scope.password };
-                AccountServices.login(model);
-                
-
-                return false;
+                        $scope.errorMessage = 'Error o clave incorrect';
+                        $scope.hasError = true;
+                        // Handle login errors here
+                        $scope.message = 'Error: Invalid user or password';
+                    });
+                //$location.path('/');
             };
-        }
-    ])
 
-    //Path: /register
-    .controller('registerController', [
-        '$scope', '$location', '$window','AccountServices', function( $scope, $location, $window, AccountServices) {
-            $('.button-checkbox').each(function() {
+            $scope.goToRegister = function() {
+                $location.path('/register');
+            };
 
-                // Settings
-                var $widget = $(this),
-                    $button = $widget.find('button'),
-                    $checkbox = $widget.find('input:checkbox'),
-                    color = $button.data('color'),
-                    settings = {
-                        on: {
-                            icon: 'glyphicon glyphicon-check'
-                        },
-                        off: {
-                            icon: 'glyphicon glyphicon-unchecked'
-                        }
-                    };
-
-                // Event Handlers
-                $button.on('click', function() {
-                    $checkbox.prop('checked', !$checkbox.is(':checked'));
-                    $checkbox.triggerHandler('change');
-                    updateDisplay();
-                });
-                $checkbox.on('change', function() {
-                    updateDisplay();
-                });
-
-                // Actions
-                function updateDisplay() {
-                    var isChecked = $checkbox.is(':checked');
-
-                    // Set the button's state
-                    $button.data('state', (isChecked) ? "on" : "off");
-
-                    // Set the button's icon
-                    $button.find('.state-icon')
-                        .removeClass()
-                        .addClass('state-icon ' + settings[$button.data('state')].icon);
-
-                    // Update the button's color
-                    if (isChecked) {
-                        $button
-                            .removeClass('btn-default')
-                            .addClass('btn-' + color + ' active');
-                    } else {
-                        $button
-                            .removeClass('btn-' + color + ' active')
-                            .addClass('btn-default');
-                    }
-                }
-
-                // Initialization
-                function init() {
-
-                    updateDisplay();
-
-                    // Inject the icon if applicable
-                    if ($button.find('.state-icon').length == 0) {
-                        $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
-                    }
-                }
-
-                init();
-            });
-
-            $scope.FirsName = "";
-
-            $scope.LastName = "";
-
-            $scope.email = "";
-
-            $scope.password = "";
-
-            $scope.password_confirmation = "";
-
-
+            $scope.goToLogin = function() {
+                $location.path('/login');
+            };
 
             $scope.register = function () {
-                var model = { Email: $scope.email, Password: $scope.password, ConfirmPassword: $scope.password_confirmation, FirstName: $scope.FirstName, LastName: $scope.LastName };
-                AccountServices.register(model);
-
-                return false;
+                console.log($scope.registerModel);
+                AccountServices
+                    .register($scope.registerModel)
+                    .success(function(data, status, headers, config) {
+                        console.log(data);
+                        $scope.goToLogin();
+                    })
+                    .error(function(data, status, headers, config) {
+                        console.log(data);
+                    });
             };
 
-            
+            $scope.$on('$viewContentLoaded', function() {
+                $window.ga('send', 'pageview', { 'page': $location.path(), 'title': $scope.$root.title });
+            });
         }
-
-
-
-
     ]);
+
+
