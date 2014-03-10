@@ -1,5 +1,6 @@
 ﻿'use strict';
 
+
 // Google Analytics Collection APIs Reference:
 // https://developers.google.com/analytics/devguides/collection/analyticsjs/
 
@@ -38,6 +39,7 @@ angular.module('app.controllers', [])
             };
 
             $scope.loginModel = { Email: '', Password: '' };
+            $scope.changePasswordModel = { Email: '' };
 
             $scope.registerModel = { Email: '', Password: '', FirstName: '', LastName: '', ConfirmPassword: '' };
 
@@ -84,6 +86,12 @@ angular.module('app.controllers', [])
                         console.log(data);
                     });
             };
+
+            $scope.sendEmail = function() {
+
+                
+            };
+            
 
             $scope.$on('$viewContentLoaded', function() {
                 $window.ga('send', 'pageview', { 'page': $location.path(), 'title': $scope.$root.title });
