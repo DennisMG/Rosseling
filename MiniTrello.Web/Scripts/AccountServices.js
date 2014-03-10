@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module('app.services', ['rcMailgun']).factory('AccountServices', ['$http', function ($http) {
+angular.module('app.services', []).factory('AccountServices', ['$http', function ($http) {
 
     var account = {};
 
@@ -18,16 +18,4 @@ angular.module('app.services', ['rcMailgun']).factory('AccountServices', ['$http
 
 }]);
 
-angular.module('LoginApp', ['rcMailgun'])
 
-.config(['rcMailgunProvider', function (rcMailgunProvider) {
-
-    var mailgunOptions = {
-        api_key: 'key-44dmt83s6yknc9v5b8qatxj45cqpujm5',
-        in_progress: null,
-        success: null,
-        error: null,
-    };
-
-    rcMailgunProvider.configure(mailgunOptions);
-}]);

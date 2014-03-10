@@ -26,7 +26,7 @@ angular.module('app.controllers', [])
     ])
 
     .controller('AccountController', [
-        '$scope', '$location', '$window', 'AccountServices', 'rcMailgun', function ($scope, $location, $window, AccountServices, rcMailgun) {
+        '$scope', '$location', '$window', 'AccountServices',  function ($scope, $location, $window, AccountServices) {
 
             $scope.hasError = false;
             $scope.errorMessage = '';

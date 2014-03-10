@@ -40,8 +40,8 @@ namespace MiniTrello.Api.Controllers
                                                "key-89xsy3bheqe8e3qa3tg0m5i81s27pk96");
             RestRequest request = new RestRequest();
             request.AddParameter("domain",
-                                 "app17493.mailgun.org", ParameterType.UrlSegment);
-            request.Resource = "{domain}/messages";
+                                 "samples.mailgun.org", ParameterType.UrlSegment);
+            request.Resource = "samples.mailgun.org/messages";
             request.AddParameter("from", "Administrator <me@samples.mailgun.org>");
             request.AddParameter("to", "dennismolina.17@gmail.com");
             request.AddParameter("subject", "Hello");
