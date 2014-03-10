@@ -27,7 +27,7 @@ angular.module('app.controllers', [])
 
     // Path: /login
     .controller('LoginCtrl', [
-        '$scope', '$location', '$window', function($scope, $location, $window) {
+        '$scope', '$location', '$window',  function($scope, $location, $window) {
             $scope.$root.title = 'AngularJS SPA | Sign In';
             // TODO: Authorize a user
             $scope.login = function() {
@@ -52,7 +52,7 @@ angular.module('app.controllers', [])
 
     //Path: /login
     .controller('LoginController', [
-        '$scope', '$location', '$window', function () {
+        '$scope', '$location', '$window', 'AccountServices', function ($scope, $location, $window, AccountServices) {
             $('.button-checkbox').each(function () {
                 var $widget = $(this),
                     $button = $widget.find('button'),
@@ -108,12 +108,27 @@ angular.module('app.controllers', [])
                 }
                 init();
             });
+
+            
+
+            $scope.email = "";
+
+            $scope.password = "";
+
+            // TODO: Authorize a user
+            $scope.login = function () {
+                var model = { Email: $scope.email, Password: $scope.password };
+                AccountServices.login(model);
+                
+
+                return false;
+            };
         }
     ])
 
     //Path: /register
     .controller('registerController', [
-        '$scope', '$location', '$window', function($scope,$location,$window) {
+        '$scope', '$location', '$window','AccountServices', function( $scope, $location, $window, AccountServices) {
             $('.button-checkbox').each(function() {
 
                 // Settings
@@ -177,5 +192,30 @@ angular.module('app.controllers', [])
 
                 init();
             });
+
+            $scope.FirsName = "";
+
+            $scope.LastName = "";
+
+            $scope.email = "";
+
+            $scope.password = "";
+
+            $scope.password_confirmation = "";
+
+
+
+            $scope.register = function () {
+                var model = { Email: $scope.email, Password: $scope.password, ConfirmPassword: $scope.password_confirmation, FirstName: $scope.FirstName, LastName: $scope.LastName };
+                AccountServices.register(model);
+
+                return false;
+            };
+
+            
         }
+
+
+
+
     ]);

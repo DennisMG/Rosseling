@@ -31,6 +31,7 @@ namespace MiniTrello.Api.Controllers
             _mappingEngine = mappingEngine;
         }
 
+        [HttpPost]
         [POST("login")]
         public AuthenticationModel Login([FromBody] AccountLoginModel model)
         {
@@ -67,7 +68,7 @@ namespace MiniTrello.Api.Controllers
             
             if (accountCreated != null)
             {
-                return new HttpResponseMessage(HttpStatusCode.Created);
+                return new HttpResponseMessage(HttpStatusCode.OK);
             }
             throw new BadRequestException("Hubo un error al guardar el usuario");
         }

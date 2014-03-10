@@ -166,6 +166,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\ConfigureAutomapper.cs" />
     <Compile Include="App_Start\ConfigureDependencies.cs" />
+    <Compile Include="App_Start\CorsHandler.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />

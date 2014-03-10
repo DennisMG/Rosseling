@@ -144,6 +144,7 @@
     <Content Include="Content\app.less" />
     <Content Include="Content\variables.less" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\AccountServices.js" />
     <Content Include="Scripts\controllers.js" />
     <Content Include="Scripts\controllers.spec.js">
       <DependentUpon>controllers.js</DependentUpon>

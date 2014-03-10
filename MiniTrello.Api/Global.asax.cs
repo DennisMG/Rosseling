@@ -8,6 +8,7 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
+using MiniTrello.Api.App_Start;
 using MiniTrello.Api.Controllers;
 using MiniTrello.Infrastructure;
 
@@ -27,6 +28,7 @@ namespace MiniTrello.Api
             //RouteConfig.RegisterRoutes(RouteTable.Routes);
             BuildContainer();
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new CorsHandler()); 
         }
 
         public IContainer BuildContainer()
