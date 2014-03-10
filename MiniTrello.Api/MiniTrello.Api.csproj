@@ -190,6 +190,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BoardController.cs" />
     <Compile Include="Controllers\CardController.cs" />
+    <Compile Include="Controllers\EncryptPassword.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LaneController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />

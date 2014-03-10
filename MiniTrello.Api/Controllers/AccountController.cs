@@ -19,6 +19,7 @@ namespace MiniTrello.Api.Controllers
 {
     public class AccountController : ApiController
     {
+        
         readonly IReadOnlyRepository _readOnlyRepository;
         readonly IWriteOnlyRepository _writeOnlyRepository;
         readonly IMappingEngine _mappingEngine;
@@ -55,7 +56,7 @@ namespace MiniTrello.Api.Controllers
         [POST("login")]
         public AuthenticationModel Login([FromBody] AccountLoginModel model)
         {
-            var account = _readOnlyRepository.First<Account>(account1 => account1.Email == model.Email && account1.Password == model.Password);
+            var account = _readOnlyRepository.First<Account>(account1 => account1.Email == model.Email && account1.Password == EncryptPassword.EncryptString(model.Password, "password"));
             if (account != null)
             {
                 var newSession = new Sessions
@@ -78,10 +79,14 @@ namespace MiniTrello.Api.Controllers
         [POST("register")]
         public HttpResponseMessage Register([FromBody] AccountRegisterModel model)
         {
+            
+            
+            
             Account accountCreated = null;
             if (PasswordIsValid(model.Password, model.ConfirmPassword) && EmailIsValid(model.Email))
             {
                 Account account = _mappingEngine.Map<AccountRegisterModel, Account>(model);
+                account.Password = EncryptPassword.EncryptString(account.Password, "password");
                 accountCreated = _writeOnlyRepository.Create(account);
             }
 
