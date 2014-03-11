@@ -215,6 +215,7 @@
     <Compile Include="Models\OrganizationArchiveModel.cs" />
     <Compile Include="Models\OrganizationGetModel.cs" />
     <Compile Include="Models\OrganizationModel.cs" />
+    <Compile Include="Models\SendEmailModel.cs" />
     <Compile Include="Models\SessionModel.cs" />
     <Compile Include="Models\UpdateAccountModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -32,7 +32,7 @@ namespace MiniTrello.Api.Controllers
             _mappingEngine = mappingEngine;
         }
 
-        public static IRestResponse SendSimpleMessage(string mail)
+        public static IRestResponse SendSimpleMessage(string mail, string message)
         {
             RestClient client = new RestClient();
             client.BaseUrl = "https://api.mailgun.net/v2";
@@ -46,7 +46,7 @@ namespace MiniTrello.Api.Controllers
             request.AddParameter("from", "MinitrelloBot <me@samples.mailgun.org>");
             request.AddParameter("to", mail);
             request.AddParameter("subject", "Welcome to MiniTrello");
-            request.AddParameter("text", "Hi there, I'm happy that you decide to join our MiniTrello community. :)");
+            request.AddParameter("text", message);
             request.Method = Method.POST;
             return client.Execute(request);
         }
@@ -76,6 +76,13 @@ namespace MiniTrello.Api.Controllers
                 "Usuario o clave incorrecto");
         }
 
+        [POST("sendEmail")]
+        public HttpResponseMessage sendEmail([FromBody] SendEmailModel model)
+        {
+            SendSimpleMessage(model.Email, "Please click in the link to redirect you... *link not implemented*");
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
+
         [POST("register")]
         public HttpResponseMessage Register([FromBody] AccountRegisterModel model)
         {
@@ -93,7 +100,7 @@ namespace MiniTrello.Api.Controllers
             
             if (accountCreated != null)
             {
-                SendSimpleMessage(accountCreated.Email);
+                SendSimpleMessage(accountCreated.Email, "Hi there, I'm happy that you decide to join our MiniTrello community. :)");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             throw new BadRequestException("Hubo un error al guardar el usuario");

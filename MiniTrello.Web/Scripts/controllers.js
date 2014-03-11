@@ -88,8 +88,16 @@ angular.module('app.controllers', [])
             };
 
             $scope.sendEmail = function() {
+                AccountServices.sendEmail($scope.changePasswordModel)
+                .success(function (data, status, headers, config) {
+                    console.log(data);
+                    $scope.goToLogin();
 
-                
+                })
+                    .error(function (data, status, headers, config) {
+                        console.log(data);
+                    });
+
             };
             
 

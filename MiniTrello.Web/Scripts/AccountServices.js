@@ -8,6 +8,10 @@ angular.module('app.services', []).factory('AccountServices', ['$http', function
         return $http.post('http://minitrelloapidm.apphb.com/login', data);
     };
 
+    account.sendEmail = function (data) {
+        return $http.post('http://minitrelloapidm.apphb.com/sendEmail', data);
+    };
+
     account.register = function (data) {
         return $http.post('http://minitrelloapidm.apphb.com/register', data);
     };
