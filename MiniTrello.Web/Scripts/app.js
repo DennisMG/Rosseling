@@ -34,7 +34,7 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
             .state('loadingpage', {
                 url: '/loading',
                 layout: 'basic',
-                templateUrl: '/views/LoadingPage',
+                templateUrl: '/views/loadingpage',
                 controller: 'AccountController'
             })
             .state('otherwise', {
