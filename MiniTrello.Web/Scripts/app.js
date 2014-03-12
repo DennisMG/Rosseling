@@ -21,7 +21,7 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
             .state('login', {
                 url: '/login',
                 layout: 'basic',
-                templateUrl: '/views/index',
+                templateUrl: '/views/Index',
                 controller: 'AccountController'
             })
 
@@ -29,6 +29,12 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
                 url: '/changepassword',
                 layout: 'basic',
                 templateUrl: '/views/register',
+                controller: 'AccountController'
+            })
+            .state('loadingpage', {
+                url: '/loading',
+                layout: 'basic',
+                templateUrl: '/views/LoadingPage',
                 controller: 'AccountController'
             })
             .state('otherwise', {

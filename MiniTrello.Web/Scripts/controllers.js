@@ -43,14 +43,18 @@ angular.module('app.controllers', [])
 
             $scope.registerModel = { Email: '', Password: '', FirstName: '', LastName: '', ConfirmPassword: '' };
 
+       
+          
             
-            $scope.login = function() {
+            $scope.login = function () {
+                $scope.goToLoadingPage();
                 console.log($scope.loginModel);
                 AccountServices
                     .login($scope.loginModel)
                     .success(function(data, status, headers, config) {
 
                         $window.sessionStorage.token = data.Token;
+                        
                         //$location.path('/boards');
                     })
                     .error(function(data, status, headers, config) {
@@ -69,11 +73,16 @@ angular.module('app.controllers', [])
                 $location.path('/register');
             };
 
+            $scope.goToLoadingPage = function () {
+                $location.path('/loading');
+            };
+
             $scope.goToLogin = function() {
                 $location.path('/login');
             };
 
             $scope.register = function () {
+                $scope.goToLoadingPage();
                 console.log($scope.registerModel);
                 AccountServices
                     .register($scope.registerModel)
@@ -87,7 +96,8 @@ angular.module('app.controllers', [])
                     });
             };
 
-            $scope.sendEmail = function() {
+            $scope.sendEmail = function () {
+                $scope.goToLoadingPage();
                 AccountServices.sendEmail($scope.changePasswordModel)
                 .success(function (data, status, headers, config) {
                     console.log(data);
