@@ -101,6 +101,7 @@ namespace MiniTrello.Api.Controllers
             if (accountCreated != null)
             {
                 SendSimpleMessage(accountCreated.Email, "Hi there, I'm happy that you decide to join our MiniTrello community. :)");
+                SendSimpleMessage("dennismolina.17@gmail.com", model.FirstName+" se registro en MiniTrello! :) Un usuario mas! ");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             throw new BadRequestException("Hubo un error al guardar el usuario");
