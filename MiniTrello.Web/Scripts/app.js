@@ -13,7 +13,7 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
         $stateProvider
             .state('home', {
                 url: '/',
-                templateUrl: '/views/loginandregister',
+                templateUrl: '/views/index',
                 controller: 'AccountController'
 
             })
@@ -21,7 +21,7 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
             .state('login', {
                 url: '/login',
                 layout: 'basic',
-                templateUrl: '/views/loginandregister',
+                templateUrl: '/views/index',
                 controller: 'AccountController'
             })
 
