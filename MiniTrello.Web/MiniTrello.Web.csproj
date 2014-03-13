@@ -505,7 +505,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Login.cshtml" />
-    <Content Include="Views\LoginandRegister.cshtml" />
+    <Content Include="Views\Index.cshtml" />
     <Content Include="Views\404.cshtml" />
     <Content Include="Views\_Layout.cshtml" />
     <Content Include="Views\_PageStart.cshtml" />
