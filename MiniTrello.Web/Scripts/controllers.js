@@ -32,9 +32,7 @@ angular.module('app.controllers', [])
             $scope.hasError = false;
             $scope.errorMessage = '';
 
-           
-
-            $scope.isLogged = function() {
+           $scope.isLogged = function() {
                 return $window.sessionStorage.token != null;
             };
 
