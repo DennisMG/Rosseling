@@ -31,6 +31,12 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
                 templateUrl: '/views/changepassword',
                 controller: 'AccountController'
             })
+            .state('boards', {
+                url: '/boards',
+                layout: 'basic',
+                templateUrl: '/views/boards',
+                controller: 'BoardController'
+            })
             .state('loadingpage', {
                 url: '/loading',
                 layout: 'basic',

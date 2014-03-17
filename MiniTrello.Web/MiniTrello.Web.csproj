@@ -148,6 +148,7 @@
     <Content Include="Content\variables.less" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\AccountServices.js" />
+    <Content Include="Scripts\BoardServices.js" />
     <Content Include="Scripts\controllers.js" />
     <Content Include="Scripts\controllers.spec.js">
       <DependentUpon>controllers.js</DependentUpon>
@@ -160,7 +161,7 @@
     <Content Include="Scripts\filters.spec.js">
       <DependentUpon>filters.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\registerController.js" />
+    <Content Include="Scripts\BoardController.js" />
     <Content Include="Scripts\services.js" />
     <Content Include="Scripts\services.spec.js">
       <DependentUpon>services.js</DependentUpon>
@@ -511,6 +512,7 @@
     <Content Include="Views\_PageStart.cshtml" />
     <Content Include="Views\ChangePassword.cshtml" />
     <Content Include="Views\LoadingPage.cshtml" />
+    <Content Include="Views\boards.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

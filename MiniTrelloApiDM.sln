@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniTrello.Api", "MiniTrell
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniTrello.Infrastructure", "MiniTrello.Infrastructure\MiniTrello.Infrastructure.csproj", "{A60BA21D-C58A-4846-BB43-FDCE2FC64A20}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniTrello.ApiWrapper", "MiniTrello.ApiWrapper\MiniTrello.ApiWrapper.csproj", "{D8950C72-9077-4E67-AF83-8D8DB2D8E853}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{A60BA21D-C58A-4846-BB43-FDCE2FC64A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A60BA21D-C58A-4846-BB43-FDCE2FC64A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A60BA21D-C58A-4846-BB43-FDCE2FC64A20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8950C72-9077-4E67-AF83-8D8DB2D8E853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8950C72-9077-4E67-AF83-8D8DB2D8E853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8950C72-9077-4E67-AF83-8D8DB2D8E853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8950C72-9077-4E67-AF83-8D8DB2D8E853}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

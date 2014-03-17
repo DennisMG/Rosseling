@@ -26,21 +26,66 @@ angular.module('app.controllers', [])
         }
     ])
 
+     .controller('BoardController', ['$scope', '$location', '$window', '$stateParams', function ($scope, $location, $window,  $stateParams) {
+
+
+         $scope.boardDetailId = $stateParams.boardId;
+
+         //console.log($location.search().boardId);
+
+         console.log($scope.boardDetailId);
+
+         $scope.boards = [];
+
+         var board = { Id: 1, Name: 'Myboard1', Description: 'Description1' };
+         var board1 = { Id: 2, Name: 'Myboard2', Description: 'Description2' };
+         $scope.boards.push(board);
+         $scope.boards.push(board1);
+
+
+         $scope.getBoardsForLoggedUser = function () {
+
+             /*BoardServices
+                 .getBoardsForLoggedUser()
+               .success(function (data, status, headers, config) {
+                   $scope.boards = data;
+               })
+               .error(function (data, status, headers, config) {
+                   console.log(data);
+               });*/
+             //$location.path('/');
+         };
+
+         if ($scope.boardDetailId > 0) {
+             //get board details
+         }
+         else {
+             $scope.getBoardsForLoggedUser();
+         }
+
+
+
+
+         $scope.$on('$viewContentLoaded', function () {
+             $window.ga('send', 'pageview', { 'page': $location.path(), 'title': $scope.$root.title });
+         });
+     }])
+
     .controller('AccountController', [
-        '$scope', '$location', '$window', 'AccountServices',  function ($scope, $location, $window, AccountServices) {
+        '$scope', '$location', '$window', 'AccountServices', function($scope, $location, $window, AccountServices) {
 
-            $scope.hasError = false;
-            $scope.errorMessage = '';
+    $scope.hasError = false;
+    $scope.errorMessage = '';
 
-           $scope.isLogged = function() {
-                return $window.sessionStorage.token != null;
-            };
+    $scope.isLogged = function() {
+        return $window.sessionStorage.token != null;
+    };
 
-            $scope.loginModel = { Email: '', Password: '' };
-            $scope.changePasswordModel = { Email: '' };
+    $scope.loginModel = { Email: '', Password: '' };
+    $scope.changePasswordModel = { Email: '' };
 
-            $scope.registerModel = { Email: '', Password: '', FirstName: '', LastName: '', ConfirmPassword: '' };
-
+    $scope.registerModel = { Email: '', Password: '', FirstName: '', LastName: '', ConfirmPassword: '' };
+    
        
           
             
@@ -50,8 +95,9 @@ angular.module('app.controllers', [])
                 AccountServices
                     .login($scope.loginModel)
                     .success(function(data, status, headers, config) {
-
+                        $scope.goToLoadingPage();
                         $window.sessionStorage.token = data.Token;
+                        $location.path('/boards');
                         
                         //$location.path('/boards');
                     })
@@ -84,8 +130,10 @@ angular.module('app.controllers', [])
                 console.log($scope.registerModel);
                 AccountServices
                     .register($scope.registerModel)
-                    .success(function(data, status, headers, config) {
+                    .success(function (data, status, headers, config) {
+                       
                         console.log(data);
+                        
                         $scope.goToLogin();
                         
                     })
@@ -114,5 +162,7 @@ angular.module('app.controllers', [])
             });
         }
     ]);
+
+
 
 
