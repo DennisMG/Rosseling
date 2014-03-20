@@ -142,7 +142,7 @@ namespace MiniTrello.Api.Controllers
             throw new BadRequestException("La clave debe contener por lo menos 1 numero y debe ser de 6 caracteres o mas.");
         }
 
-        [POST("/ChangePassword/{token}")]
+        [POST("changepassword/{token}")]
         public AccountLoginModel ChangePasword([FromBody] AccountChangePassword model, string token)
         {
             var session = _readOnlyRepository.First<Sessions>(session1 => session1.Token == token );
@@ -156,7 +156,7 @@ namespace MiniTrello.Api.Controllers
             throw new BadRequestException("Hubo un error al cambiar de Password"); 
         }
 
-        [POST("/ForgotPassword/{token}")]
+        [POST("forgotpassword/{token}")]
         public AccountLoginModel ForgotPasword([FromBody] AccountForgotPasswordModel model,string token)
         {
             var session = _readOnlyRepository.First<Sessions>(session1 => session1.Token == token);
@@ -170,7 +170,7 @@ namespace MiniTrello.Api.Controllers
             throw new BadRequestException("Hubo un error al cambiar el password"); 
         }
 
-        [POST("/UpdateAccount/{Token}")]
+        [POST("updateaccount/{Token}")]
         public UpdateAccountModel UpdateAccount([FromBody] UpdateAccountModel model, string Token)
         {
             var session = _readOnlyRepository.First<Sessions>(session1 => session1.Token == Token);

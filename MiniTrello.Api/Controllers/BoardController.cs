@@ -28,7 +28,7 @@ namespace MiniTrello.Api.Controllers
             _mappingEngine = mappingEngine;
         }
 
-       [POST("Boards/createBoard/{Token}")]
+       [POST("boards/createBoard/{Token}")]
         public AccountBoardModel createNewBoard([FromBody] AccountBoardModel model,string Token)
         {
             var session = NewValidSession(Token);
@@ -45,7 +45,7 @@ namespace MiniTrello.Api.Controllers
         }
 
         [AcceptVerbs("PUT")]
-        [PUT("Boards/ChangeBoardName/{IdBoard}/{Token}")]
+        [PUT("boards/ChangeBoardName/{IdBoard}/{Token}")]
         public ChangeBoardNameModel ChangeBoardName([FromBody] ChangeBoardNameModel model, long IdBoard, string Token)
         {
             var session = NewValidSession(Token);
@@ -58,7 +58,7 @@ namespace MiniTrello.Api.Controllers
         }
 
         [AcceptVerbs(new[] { "DELETE" })]
-        [DELETE("board/{Token}")]
+        [DELETE("boards/{Token}")]
         public AccountBoardModel Archive(string Token, [FromBody] BoardArchiveModel model)
         {
             var session = NewValidSession(Token);
@@ -74,7 +74,7 @@ namespace MiniTrello.Api.Controllers
                 throw new BadRequestException("You don't have the privileges to do this");
         }
 
-        [GET("board/{Token}/{BoardId}")]
+        [GET("boards/{Token}/{BoardId}")]
         public BoardGetModel GetById(string Token, long BoardId)
         {
             var session = NewValidSession(Token);
@@ -109,7 +109,7 @@ namespace MiniTrello.Api.Controllers
         }
 
        // [AcceptVerbs(new[] {"PUT"})]
-        [POST("board/{Token}/{BoardId}")]
+        [POST("boards/{Token}/{BoardId}")]
         public AccountBoardModel InviteMembertoBoard(string Token, long BoardId, [FromBody] InviteMemberToBoardModel model)
         {
             var session = NewValidSession(Token);

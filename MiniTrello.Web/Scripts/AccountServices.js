@@ -16,6 +16,10 @@ angular.module('app.services', []).factory('AccountServices', ['$http', function
         return $http.post('http://minitrelloapidm.apphb.com/register', data);
     };
 
+    account.forgotPassword = function (data) {
+        return $http.post('http://minitrelloapidm.apphb.com/forgotpassword/' + $scope.sessionStorage.token, data);
+    };
+
     return account;
 
 
