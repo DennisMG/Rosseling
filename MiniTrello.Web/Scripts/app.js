@@ -31,23 +31,35 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
                 templateUrl: '/views/changepassword',
                 controller: 'AccountController'
             })
+
             .state('boards', {
                 url: '/boards',
                 layout: 'basic',
                 templateUrl: '/views/boards',
                 controller: 'BoardController'
             })
+
+            .state('forgotpassword', {
+                url: '/forgotpassword/:token',
+                layout: 'basic',
+                templateUrl: '/views/forgotpasswordview',
+                controller: 'AccountController'
+            })
+
             .state('organizations', {
                 url: '/organizations',
                 layout: 'basic',
                 templateUrl: '/views/organization',
                 controller: 'OrganizationController'
+            })
+
             .state('loadingpage', {
                 url: '/loading',
                 layout: 'basic',
                 templateUrl: '/views/loadingpage',
                 controller: 'AccountController'
             })
+
             .state('otherwise', {
                 url: '*path',
                 templateUrl: '/views/404',

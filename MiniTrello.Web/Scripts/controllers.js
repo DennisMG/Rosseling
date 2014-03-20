@@ -86,7 +86,7 @@ angular.module('app.controllers', [])
     $scope.changePasswordModel = { Email: '' };
 
     $scope.registerModel = { Email: '', Password: '', FirstName: '', LastName: '', ConfirmPassword: '' };
-    
+    $scope.AccountForgotPasswordModel = { Email: '', NewPassword: '',  ConfirmNewPassword: '' };
        
           
             
@@ -156,6 +156,22 @@ angular.module('app.controllers', [])
                         console.log(data);
                     });
 
+            };
+
+            $scope.forgotpassword = function () {
+                $scope.window.sessionStorage.token = $stateParams.token;
+                $scope.goToLoadingPage();
+                AccountServices.forgotPassword($scope.AccountForgotPasswordModel)
+                    .success(function (data, status, headers, config) {
+
+                        console.log(data);
+
+                        $scope.goToLogin();
+
+                    })
+                    .error(function (data, status, headers, config) {
+                        console.log(data);
+                    });
             };
             
 

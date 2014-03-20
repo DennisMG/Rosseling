@@ -514,6 +514,7 @@
     <Content Include="Views\LoadingPage.cshtml" />
     <Content Include="Views\boards.cshtml" />
     <Content Include="Views\Organizations.cshtml" />
+    <Content Include="Views\ForgotPasswordView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
