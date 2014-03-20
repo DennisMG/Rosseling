@@ -5,10 +5,7 @@
 
 angular.module('app.controllers',[])
 
-
-
-    
-    .controller('BoardController', ['$scope', '$location', '$window', 'BoardServices', '$stateParams', function ($scope, $location, $window, BoardServices, $stateParams) {
+.controller('BoardController', ['$scope', '$location', '$window', 'BoardServices', '$stateParams', function ($scope, $location, $window, BoardServices, $stateParams) {
 
 
         $scope.boardDetailId = $stateParams.boardId;

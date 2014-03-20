@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Providers.Entities;
 using AttributeRouting.Web.Http;
 using AutoMapper;
+using FizzWare.NBuilder;
 using MiniTrello.Api.Models;
 using MiniTrello.Domain.Entities;
 using MiniTrello.Domain.Services;
@@ -36,7 +37,7 @@ namespace MiniTrello.Api.Controllers
              return _mappingEngine.Map<Organization, OrganizationModel>(archivedOrganization);
          }
 
-        [GET("organization/{accessToken}/{organizationId}")]
+        [GET("organization/{organizationId}/{accessToken}")]
          public OrganizationModel GetById(string accessToken, long organizationId)
          {
              var organization = _readOnlyRepository.GetById<Organization>(organizationId);
@@ -54,6 +55,33 @@ namespace MiniTrello.Api.Controllers
             var organizationCreated = _writeOnlyRepository.Create(newOrganization);
 
             return new OrganizationModel{Description = organizationCreated.Description,Name = organizationCreated.Name};
+        }
+
+        [GET("organizations/{Token}")]
+        public List<OrganizationModel> GetAllForUser(string Token)
+        {
+            var session = NewValidSession(Token);
+            //obtener el usuario que pertenece al token
+            //validar la session
+            //var account = _readOnlyRepository.GetById<Account>(1);
+            //var mappedOrganizationModelList = _mappingEngine.Map<IEnumerable<Organization>,IEnumerable<OrganizationModel >> (session.User.Organizations).ToList();
+            //return mappedOrganizationModelList;
+            var organizations = Builder<OrganizationModel>.CreateListOfSize(10).Build().ToList();
+            return organizations;
+        } 
+
+        public Sessions NewValidSession(string token)
+        {
+
+            var session = _readOnlyRepository.First<Sessions>(session1 => token == session1.Token);
+            ValidateSession(session);
+            return session;
+        }
+
+        public void ValidateSession(Sessions session)
+        {
+            if (session == null || !session.IsTokenActive())
+                throw new BadRequestException("Session has expired. Please login again.");
         }
 
 

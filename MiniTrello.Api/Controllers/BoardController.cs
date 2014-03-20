@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Web.Providers.Entities;
 using AttributeRouting.Web.Http;
 using AutoMapper;
+using FizzWare.NBuilder;
 using MiniTrello.Domain.Entities;
 using MiniTrello.Domain.Services;
 using MiniTrello.Api.Models;
@@ -87,6 +88,17 @@ namespace MiniTrello.Api.Controllers
                 
             throw new BadRequestException("Couldn't retrieve board info");
         }
+
+        [GET("getboards/{Token}")]
+        public List<AccountBoardModel> GetAllForUser(string Token)
+         {
+             var session = NewValidSession(Token);
+             //var account = _readOnlyRepository.GetById<Account>(1);
+             //var mappedOrganizationModelList = _mappingEngine.Map<IEnumerable<Board>,IEnumerable<AccountBoardModel>> (session.User.Boards).ToList();
+             //return mappedOrganizationModelList;
+             var boards = Builder<AccountBoardModel>.CreateListOfSize(10).Build().ToList();
+             return boards;
+         }
 
         public Sessions NewValidSession(string token)
         {

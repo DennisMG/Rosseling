@@ -37,6 +37,11 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
                 templateUrl: '/views/boards',
                 controller: 'BoardController'
             })
+            .state('organizations', {
+                url: '/organizations',
+                layout: 'basic',
+                templateUrl: '/views/organization',
+                controller: 'OrganizationController'
             .state('loadingpage', {
                 url: '/loading',
                 layout: 'basic',

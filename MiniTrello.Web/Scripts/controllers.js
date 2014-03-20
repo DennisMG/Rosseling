@@ -45,14 +45,15 @@ angular.module('app.controllers', [])
 
          $scope.getBoardsForLoggedUser = function () {
 
-             /*BoardServices
+             BoardServices
                  .getBoardsForLoggedUser()
                .success(function (data, status, headers, config) {
+                   console.log(data);
                    $scope.boards = data;
                })
                .error(function (data, status, headers, config) {
                    console.log(data);
-               });*/
+               });
              //$location.path('/');
          };
 
@@ -90,8 +91,10 @@ angular.module('app.controllers', [])
           
             
             $scope.login = function () {
+
                 $scope.goToLoadingPage();
                 console.log($scope.loginModel);
+
                 AccountServices
                     .login($scope.loginModel)
                     .success(function(data, status, headers, config) {
@@ -99,7 +102,6 @@ angular.module('app.controllers', [])
                         $window.sessionStorage.token = data.Token;
                         $location.path('/boards');
                         
-                        //$location.path('/boards');
                     })
                     .error(function(data, status, headers, config) {
                         // Erase the token if the user fails to log in

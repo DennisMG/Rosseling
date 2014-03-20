@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module('app.services', []).factory('BoardServices', ['$http', '$window', function ($http, $window) {
+angular.module('app.services').factory('BoardServices', ['$http', '$window', function ($http, $window) {
 
     var board = {};
 
