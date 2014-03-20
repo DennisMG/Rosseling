@@ -10,11 +10,11 @@ namespace MiniTrello.Api
     {
         public void Run()
         {
-            Mapper.CreateMap<Account, AccountLoginModel>().ReverseMap();
-            Mapper.CreateMap<Account, AccountRegisterModel>().ReverseMap();
+            Mapper.CreateMap<Accounts, AccountLoginModel>().ReverseMap();
+            Mapper.CreateMap<Accounts, AccountRegisterModel>().ReverseMap();
             Mapper.CreateMap<Organization, OrganizationModel>().ReverseMap();
             Mapper.CreateMap<Board, AccountBoardModel>().ReverseMap();
-            Mapper.CreateMap<Account, UpdateAccountModel>().ReverseMap();
+            Mapper.CreateMap<Accounts, UpdateAccountModel>().ReverseMap();
             Mapper.CreateMap<Board, BoardGetModel>().ReverseMap();
             Mapper.CreateMap<Card, CardModel>().ReverseMap();
             Mapper.CreateMap<Board, AccountBoardModel>().ReverseMap();

@@ -10,9 +10,9 @@ using MiniTrello.Domain.Entities;
 
 namespace MiniTrello.Data.AutoMappingOverride
 {
-    public class AccountOverride : IAutoMappingOverride<Account>
+    public class AccountOverride : IAutoMappingOverride<Accounts>
     {
-        public void Override(AutoMapping<Account> mapping)
+        public void Override(AutoMapping<Accounts> mapping)
         {
              //mapping.HasMany(x => x.Referrals)
              //    .Inverse()

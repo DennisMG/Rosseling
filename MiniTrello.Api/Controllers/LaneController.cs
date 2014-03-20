@@ -54,7 +54,7 @@ namespace MiniTrello.Api.Controllers
             return _readOnlyRepository.First<Sessions>(session1 => token == session1.Token);
         }
 
-        public void VerifyAdministrator(Account administrator, Account user)
+        public void VerifyAdministrator(Accounts administrator, Accounts user)
         {
             if (administrator != user)
                 throw new BadRequestException("You don't enough privileges to do this");

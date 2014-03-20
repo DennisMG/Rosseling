@@ -72,7 +72,7 @@ namespace MiniTrello.Api.Controllers
             return _mappingEngine.Map<Board, AccountBoardModel>(archivedBoard);
         }
 
-        public void VerifyAdministrator(Account administrator, Account user)
+        public void VerifyAdministrator(Accounts administrator, Accounts user)
         {
             if (administrator != user)
                 throw new BadRequestException("You don't have the privileges to do this");
@@ -98,10 +98,10 @@ namespace MiniTrello.Api.Controllers
          {
              var session = NewValidSession(Token);
              //var account = _readOnlyRepository.GetById<Account>(1);
-             var mappedOrganizationModelList = _mappingEngine.Map<IEnumerable<Board>,IEnumerable<AccountBoardModel>> (session.User.Boards).ToList();
-             return mappedOrganizationModelList;
-             //var boards = Builder<AccountBoardModel>.CreateListOfSize(10).Build().ToList();
-             //return boards;
+             //var mappedOrganizationModelList = _mappingEngine.Map<IEnumerable<Board>,IEnumerable<AccountBoardModel>> (session.User.Organizations).ToList();
+             //return mappedOrganizationModelList;
+             var boards = Builder<AccountBoardModel>.CreateListOfSize(10).Build().ToList();
+             return boards;
          }
 
         public Sessions NewValidSession(string token)
@@ -119,11 +119,11 @@ namespace MiniTrello.Api.Controllers
             var session = NewValidSession(Token);
             var board = _readOnlyRepository.GetById<Board>(BoardId);
             VerifyAdministrator(session.User, board.Administrator);
-            var member = _readOnlyRepository.GetById<Account>(model.MemberId);
+            var member = _readOnlyRepository.GetById<Accounts>(model.MemberId);
             if(member == null )
                 throw new BadRequestException("Failed to add member to board: Member not Found");
             board.AddMember(member);
-            member.AddBoard(board);
+            //member.AddBoard(board);
             var boardUpdated = _writeOnlyRepository.Create(board);
             var memberUpdated = _writeOnlyRepository.Update(member);
             var NewMember = _mappingEngine.Map<Board, AccountBoardModel>(boardUpdated);

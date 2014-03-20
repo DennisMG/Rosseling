@@ -2,9 +2,9 @@
 
 namespace MiniTrello.Domain.Entities
 {
-    public class Account : IEntity
+    public class Accounts : IEntity
     {
-        private readonly IList<Board> _boards = new List<Board>();
+       
         private readonly IList<Organization> _organizations = new List<Organization>();
         public virtual long Id { get; set; }
         public virtual bool IsArchived { get; set; }
@@ -13,11 +13,6 @@ namespace MiniTrello.Domain.Entities
         public virtual string Email { get; set; }
         public virtual string Password { get; set; }
 
-        public virtual IEnumerable<Board> Boards
-        {
-            get { return _boards; }
-        }
-
         public virtual IEnumerable<Organization> Organizations
         {
             get { return _organizations; }
@@ -25,18 +20,12 @@ namespace MiniTrello.Domain.Entities
 
         public virtual void AddOrganization(Organization organization)
         {
-            if (_organizations.Contains(organization))
+            if (!_organizations.Contains(organization))
             {
                 _organizations.Add(organization);
             }
         }
 
-        public virtual void AddBoard(Board board)
-        {
-            if (_boards.Contains(board))
-            {
-                _boards.Add(board);
-            }
-        }
+        
     }
 }

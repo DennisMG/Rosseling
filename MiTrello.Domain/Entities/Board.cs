@@ -4,17 +4,14 @@ namespace MiniTrello.Domain.Entities
     public class Board : IEntity
 
     {
-        private readonly IList<Account> _members = new List<Account>();
+        private readonly IList<Accounts> _members = new List<Accounts>();
         private readonly IList<Lane> _lanes = new List<Lane>();
-        public virtual Account Administrator { get; set; }
+        public virtual Accounts Administrator { get; set; }
         public virtual string Title { get; set; }
         public virtual long Id { get; set; }
         public virtual bool IsArchived { get; set; }
 
-        public virtual IEnumerable<Lane> Lanes
-        {
-            get { return _lanes; }
-        }
+        public virtual IEnumerable<Lane> Lanes{ get { return _lanes; } }
 
         public virtual void AddLane(Lane lane)
         {
@@ -22,13 +19,9 @@ namespace MiniTrello.Domain.Entities
         }
 
 
-        public virtual IEnumerable<Account> Members
-        {
-            get { return _members; }
-            
-        }
+        public virtual IEnumerable<Accounts> Members{ get { return _members; } }
 
-        public virtual void AddMember(Account member)
+        public virtual void AddMember(Accounts member)
         {
             if (!_members.Contains(member))
             {

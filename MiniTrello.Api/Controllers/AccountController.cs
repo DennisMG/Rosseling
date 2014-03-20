@@ -56,7 +56,7 @@ namespace MiniTrello.Api.Controllers
         [POST("login")]
         public AuthenticationModel Login([FromBody] AccountLoginModel model)
         {
-            var account = _readOnlyRepository.First<Account>(account1 => account1.Email == model.Email && account1.Password == EncryptPassword.EncryptString(model.Password, "password"));
+            var account = _readOnlyRepository.First<Accounts>(account1 => account1.Email == model.Email && account1.Password == EncryptPassword.EncryptString(model.Password, "password"));
             if (account != null)
             {
                 var newSession = new Sessions
@@ -79,7 +79,7 @@ namespace MiniTrello.Api.Controllers
         [POST("sendEmail")]
         public HttpResponseMessage sendEmail([FromBody] SendEmailModel model)
         {
-            var account = _readOnlyRepository.First<Account>(account1 => account1.Email == model.Email);
+            var account = _readOnlyRepository.First<Accounts>(account1 => account1.Email == model.Email);
             Sessions newSession=null;
             if (account != null)
             {
@@ -110,10 +110,10 @@ namespace MiniTrello.Api.Controllers
             
             
             
-            Account accountCreated = null;
+            Accounts accountCreated = null;
             if (PasswordIsValid(model.Password, model.ConfirmPassword) && EmailIsValid(model.Email))
             {
-                Account account = _mappingEngine.Map<AccountRegisterModel, Account>(model);
+                Accounts account = _mappingEngine.Map<AccountRegisterModel, Accounts>(model);
                 account.Password = EncryptPassword.EncryptString(account.Password, "password");
                 var organization = new Organization {Name = "Organization Example", Description = "This is an example",};
                 account.AddOrganization(organization);

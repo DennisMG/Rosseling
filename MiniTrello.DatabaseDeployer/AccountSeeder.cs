@@ -18,27 +18,25 @@ namespace MiniTrello.DatabaseDeployer
 
         public void Seed()
         {
-            IList<Account> accountList = Builder<Account>.CreateListOfSize(10).Build();
-            
-            foreach (Account account in accountList)
+            IList<Accounts> accountList = Builder<Accounts>.CreateListOfSize(10).Build();
+            foreach (Accounts account in accountList)
             {
-                var boards = Builder<Board>.CreateListOfSize(2).Build();
-                foreach (var board in boards)
+                var organizations = Builder<Organization>.CreateListOfSize(2).Build();
+                foreach (var organization in organizations)
                 {
-                    var lanes = Builder<Lane>.CreateListOfSize(2).Build();
-                    foreach (var lane in lanes)
+                    var boards = Builder<Board>.CreateListOfSize(2).Build();
+                    foreach (var board in boards)
                     {
-                        _session.Save(lane);
+                        _session.Save(board);
+                        organization.AddBoard(board);
                     }
-                    _session.Save(board);
-                    board.AddLane(lanes[0]);
-                    board.AddLane(lanes[1]);
+                    _session.Save(organization);
+                    account.AddOrganization(organization);
                 }
-                account.AddBoard(boards[0]);
-                account.AddBoard(boards[1]);
-                
                 _session.Save(account);
             }
+            
+            
         }
     }
 }

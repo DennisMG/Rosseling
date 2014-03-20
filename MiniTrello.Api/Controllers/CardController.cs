@@ -86,7 +86,7 @@ namespace MiniTrello.Api.Controllers
                 throw new BadRequestException("Session has expired. Please login again.");
         }
 
-        public void VerifyAdministrator(Account administrator, Account user)
+        public void VerifyAdministrator(Accounts administrator, Accounts user)
         {
             if (administrator != user)
                 throw new BadRequestException("You don't have the privileges to do this");
