@@ -93,15 +93,15 @@ namespace MiniTrello.Api.Controllers
             throw new BadRequestException("Couldn't retrieve board info");
         }
 
-        [GET("getboards/{Token}")]
-        public List<AccountBoardModel> GetAllForUser(string Token)
+        [GET("getboards/{IdOrganization}/{Token}")]
+        public List<AccountBoardModel> GetAllForUser(string Token,int IdOrganization)
          {
              var session = NewValidSession(Token);
              //var account = _readOnlyRepository.GetById<Account>(1);
-             //var mappedOrganizationModelList = _mappingEngine.Map<IEnumerable<Board>,IEnumerable<AccountBoardModel>> (session.User.Organizations).ToList();
-             //return mappedOrganizationModelList;
-             var boards = Builder<AccountBoardModel>.CreateListOfSize(10).Build().ToList();
-             return boards;
+             var mappedOrganizationModelList = _mappingEngine.Map<IEnumerable<Board>,IEnumerable<AccountBoardModel>> (session.User.Organizations.ElementAt(IdOrganization).Boards).ToList();
+             return mappedOrganizationModelList;
+             //var boards = Builder<AccountBoardModel>.CreateListOfSize(10).Build().ToList();
+             //return boards;
          }
 
         public Sessions NewValidSession(string token)

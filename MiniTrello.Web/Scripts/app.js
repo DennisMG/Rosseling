@@ -33,7 +33,7 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
             })
 
             .state('boards', {
-                url: '/boards',
+                url: '/boards/:IdOrganization',
                 layout: 'basic',
                 templateUrl: '/views/boards',
                 controller: 'BoardController'

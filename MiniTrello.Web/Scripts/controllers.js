@@ -29,7 +29,7 @@ angular.module('app.controllers', [])
     .controller('BoardController', ['$scope', '$location', '$window', '$stateParams', 'BoardServices', function ($scope, $location, $window, $stateParams, boardServices) {
 
 
-         $scope.boardDetailId = $stateParams.boardId;
+        $scope.boardDetailId = $stateParams.IdOrganization;
 
          //console.log($location.search().boardId);
 
@@ -46,9 +46,9 @@ angular.module('app.controllers', [])
          $scope.getBoards = function () {
 
              boardServices
-                 .getBoardsForLoggedUser()
+                 .getBoardsForLoggedUser($scope.boardDetailId)
                .success(function (data, status, headers, config) {
-                   //console.log(data);
+                   console.log(data);
                    $scope.boards = data;
                })
                .error(function (data, status, headers, config) {
@@ -172,7 +172,7 @@ angular.module('app.controllers', [])
                         $window.sessionStorage.token = data.Token;
                         $scope.UserName.Name = data.Name;
                         console.log($scope.UserName.Name);
-                        $location.path('/boards');
+                        $location.path('/organizations');
                         
                     })
                     .error(function(data, status, headers, config) {
