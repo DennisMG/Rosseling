@@ -1,0 +1,40 @@
+﻿@{
+    PageData["title"] = "Create Board";
+}
+
+
+
+<div class="container" ng-app="app.controllers">
+
+    <div class="row" style="margin:100px">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form role="form">
+                <h2>Create New Board</h2>
+                <hr class="colorgraph">
+
+
+                <div class="form-group">
+                    <input ng-model="NewBoardModel.Title" type="text" name="text" id="name" class="form-control input-lg" placeholder="Board Title" tabindex="4">
+                    
+                </div>
+
+
+
+                <hr class="colorgraph">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6"><input type="submit" ng-disabled="!(NewBoardModel.Title)" disabled value="Create" class="btn btn-primary btn-block btn-lg" tabindex="7" ng-click="CreateBoard()"></div>
+                    <div class="col-xs-12 col-md-6"><a href="./organizations" class="btn btn-success btn-block btn-lg">Back</a></div>
+                    <div class="col-md-12">
+
+                    </div>
+
+
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+    <!-- Modal -->
+
+</div>

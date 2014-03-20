@@ -12,6 +12,10 @@ angular.module('app.services').factory('BoardServices', ['$http', '$window', fun
         return $http.get(baseUrl + '/getboards/' + IdOrganization + '/' + $window.sessionStorage.token);
     };
 
+    board.createBoardsForLoggedUser = function (IdOrganization) {
+        return $http.post(baseUrl + '/createBoard/' + IdOrganization + '/' + $window.sessionStorage.token);
+    };
+
     return board;
 
 }]);

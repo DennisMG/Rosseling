@@ -57,6 +57,21 @@ angular.module('app.controllers', [])
              //$location.path('/');
          };
 
+         $scope.CreateBoard = function () {
+             $location.path('/loading');
+             boardServices
+                 .createBoardsForLoggedUser($scope.boardDetailId)
+                 .success(function(data, status, headers, config) {
+                     console.log(data);
+                     $location.path('/boards/' + $scope.boardDetailId);
+
+                 })
+                 .error(function(data, status, headers, config) {
+                     console.log(data);
+                     $location.path('/createboard/' + $scope.boardDetailId);
+                 });
+         };
+
         // if ($scope.boardDetailId > 0) {
              //get board details
             
@@ -153,7 +168,7 @@ angular.module('app.controllers', [])
 
     $scope.registerModel = { Email: '', Password: '', FirstName: '', LastName: '', ConfirmPassword: '' };
     $scope.AccountForgotPasswordModel = { Email: '', NewPassword: '', ConfirmNewPassword: '' };
-    $scope.UserName = 'Dennis_' ;
+    $scope.UserName = '' ;
 
         $scope.logout = function() {
             delete $window.sessionStorage.token;

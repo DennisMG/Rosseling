@@ -46,6 +46,13 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
                 controller: 'OrganizationController'
             })
 
+            .state('createboard', {
+                url: '/createboard/:IdOrganization',
+                layout: 'basic',
+                templateUrl: '/views/createnewboardview',
+                controller: 'BoardController'
+            })
+
             .state('forgotpassword', {
                 url: '/forgotpassword/:tokencito',
                 layout: 'basic',

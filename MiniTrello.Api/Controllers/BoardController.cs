@@ -29,16 +29,23 @@ namespace MiniTrello.Api.Controllers
         }
 
        [POST("createBoard/{IdOrganization}/{Token}")]
-        public AccountBoardModel createNewBoard([FromBody] AccountBoardModel model,long IdOrganization,string Token)
+        public AccountBoardModel createNewBoard([FromBody] AccountBoardModel model,long IdOrganization, string Token)
         {
-           var session = NewValidSession(Token);
+           var Board = _mappingEngine.Map<AccountBoardModel, Board>(model);
+           var session = _readOnlyRepository.First<Sessions>(session1 => session1.Token == Token);
+           if (session == null || !session.IsTokenActive())
+               throw new BadRequestException("Session has expired. Please login again.");
+
            Organization organization = _readOnlyRepository.GetById<Organization>(IdOrganization);
-           var newBoard = new Board {Title = model.Title, Administrator = session.User, IsArchived = false};
-           organization.AddBoard(newBoard);
+          
+           
+
+           //var newBoard = new Board {Title = model.Title, Administrator = session.User, IsArchived = false};
+           organization.AddBoard(Board);
            var organizacionUpdate = _writeOnlyRepository.Update(organization);
            //var accountUpdate = _writeOnlyRepository.Update(session);
            //session.User.AddBoard(newBoard);
-           var BoardCreated = _writeOnlyRepository.Create(newBoard);
+           var BoardCreated = _writeOnlyRepository.Create(Board);
            return new AccountBoardModel { Title = BoardCreated.Title};
         }
 
