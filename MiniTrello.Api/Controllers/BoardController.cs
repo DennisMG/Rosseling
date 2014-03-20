@@ -94,10 +94,10 @@ namespace MiniTrello.Api.Controllers
          {
              var session = NewValidSession(Token);
              //var account = _readOnlyRepository.GetById<Account>(1);
-             //var mappedOrganizationModelList = _mappingEngine.Map<IEnumerable<Board>,IEnumerable<AccountBoardModel>> (session.User.Boards).ToList();
-             //return mappedOrganizationModelList;
-             var boards = Builder<AccountBoardModel>.CreateListOfSize(10).Build().ToList();
-             return boards;
+             var mappedOrganizationModelList = _mappingEngine.Map<IEnumerable<Board>,IEnumerable<AccountBoardModel>> (session.User.Boards).ToList();
+             return mappedOrganizationModelList;
+             //var boards = Builder<AccountBoardModel>.CreateListOfSize(10).Build().ToList();
+             //return boards;
          }
 
         public Sessions NewValidSession(string token)

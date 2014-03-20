@@ -26,7 +26,7 @@ angular.module('app.controllers', [])
         }
     ])
 
-     .controller('BoardController', ['$scope', '$location', '$window', '$stateParams', function ($scope, $location, $window,  $stateParams) {
+     .controller('BoardController', ['$scope', '$location', '$window', '$stateParams', 'BoardServices', function ($scope, $location, $window, $stateParams, boardServices) {
 
 
          $scope.boardDetailId = $stateParams.boardId;
@@ -43,12 +43,12 @@ angular.module('app.controllers', [])
          $scope.boards.push(board1);
 
 
-         $scope.getBoardsForLoggedUser = function () {
+         $scope.getBoards = function () {
 
-             BoardServices
+             boardServices
                  .getBoardsForLoggedUser()
                .success(function (data, status, headers, config) {
-                   console.log(data);
+                   //console.log(data);
                    $scope.boards = data;
                })
                .error(function (data, status, headers, config) {
@@ -57,12 +57,15 @@ angular.module('app.controllers', [])
              //$location.path('/');
          };
 
-         if ($scope.boardDetailId > 0) {
+        // if ($scope.boardDetailId > 0) {
              //get board details
-         }
-         else {
-             $scope.getBoardsForLoggedUser();
-         }
+            
+         //}
+         //else {
+           //  $scope.getBoardsForLoggedUser();
+         //}
+
+         $scope.getBoards();
 
 
 

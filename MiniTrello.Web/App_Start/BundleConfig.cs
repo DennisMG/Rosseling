@@ -22,10 +22,10 @@ namespace App.MiniTrello.Web
                 "~/scripts/vendor/angular-ui-router.js",
                 "~/scripts/filters.js",
                 "~/scripts/services.js",
-                "~/scripts/BoardController.js",
-                 "~/scripts/BoardServices.js",
                 "~/scripts/AccountServices.js",
+                "~/scripts/BoardServices.js",
                 "~/scripts/directives.js",
+                "~/scripts/BoardController.js",
                 "~/scripts/controllers.js",
                 "~/scripts/app.js"));
         }
