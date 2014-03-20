@@ -149,8 +149,8 @@ namespace MiniTrello.Api.Controllers
             if (session != null && PasswordIsValid(model.ConfirmNewPassword,model.NewPassword))
             {
                 session.User.Password = model.NewPassword;
-                var accountUpdated = _writeOnlyRepository.Update(session);
-                var newModel= new AccountLoginModel {Email = accountUpdated.User.Email, Password = accountUpdated.User.Password};
+                var accountUpdated = _writeOnlyRepository.Update(session.User);
+                var newModel= new AccountLoginModel {Email = accountUpdated.Email, Password = accountUpdated.Password};
                 return newModel;
             }
             throw new BadRequestException("Hubo un error al cambiar de Password"); 
@@ -161,11 +161,11 @@ namespace MiniTrello.Api.Controllers
         {
             var session = _readOnlyRepository.First<Sessions>(session1 => session1.Token == token);
             ValidateSession(session);
-            if (PasswordIsValid(model.NewPassword,model.ConfirmNewPassword))
+            if (PasswordIsValid(model.NewPassword, model.ConfirmNewPassword))
             {
                 session.User.Password = model.NewPassword;
-                var accountUpdated = _writeOnlyRepository.Update(session.User);
-                return new AccountLoginModel {Email = accountUpdated.Email, Password = accountUpdated.Password};;
+                var accountUpdated = _writeOnlyRepository.Update(session);
+                return new AccountLoginModel {Email = accountUpdated.User.Email, Password = accountUpdated.User.Password};;
             }
             throw new BadRequestException("Hubo un error al cambiar el password"); 
         }

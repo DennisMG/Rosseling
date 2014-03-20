@@ -73,7 +73,7 @@ angular.module('app.controllers', [])
      }])
 
     .controller('AccountController', [
-        '$scope', '$location', '$window', 'AccountServices', function($scope, $location, $window, AccountServices) {
+        '$scope', '$location', '$window', 'AccountServices', '$stateParams', function ($scope, $location, $window, AccountServices, $stateParams) {
 
     $scope.hasError = false;
     $scope.errorMessage = '';
@@ -157,11 +157,14 @@ angular.module('app.controllers', [])
                     });
 
             };
-
+        
             $scope.forgotpassword = function () {
-                $scope.window.sessionStorage.token = $stateParams.token;
+                
                 $scope.goToLoadingPage();
-                AccountServices.forgotPassword($scope.AccountForgotPasswordModel)
+                //$scope.sessionStorage.token = $stateParams.token;
+                console.log($stateParams.tokencito);
+                console.log($scope.AccountForgotPasswordModel);
+                AccountServices.forgotPassword($scope.AccountForgotPasswordModel, $stateParams.tokencito)
                     .success(function (data, status, headers, config) {
 
                         console.log(data);
