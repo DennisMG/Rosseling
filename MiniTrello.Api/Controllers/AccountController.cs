@@ -69,7 +69,7 @@ namespace MiniTrello.Api.Controllers
                 
                 var sessionCreated = _writeOnlyRepository.Create(newSession);
                 
-                return new AuthenticationModel(){Token = sessionCreated.Token};
+                return new AuthenticationModel(){Token = sessionCreated.Token, Name = sessionCreated.User.FirstName};
             }
             
             throw new BadRequestException(

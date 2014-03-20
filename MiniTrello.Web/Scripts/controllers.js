@@ -80,6 +80,7 @@ angular.module('app.controllers', [])
 
     $scope.hasError = false;
     $scope.errorMessage = '';
+        $scope.UserName = '';
 
     $scope.isLogged = function() {
         return $window.sessionStorage.token != null;
@@ -103,6 +104,7 @@ angular.module('app.controllers', [])
                     .success(function(data, status, headers, config) {
                         $scope.goToLoadingPage();
                         $window.sessionStorage.token = data.Token;
+                        $scope.UserName = data.Name;
                         $location.path('/boards');
                         
                     })
