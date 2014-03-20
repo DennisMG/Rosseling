@@ -26,11 +26,11 @@ angular.module('app.controllers', [])
         }
     ])
 
-    .controller('BoardController', ['$scope', '$location', '$window', '$stateParams', 'BoardServices', function ($scope, $location, $window, $stateParams, boardServices) {
+    .controller('BoardController', ['$scope', '$location', '$window', '$stateParams', 'BoardServices', function ($scope, $location, $window, $stateParams, BoardServices) {
 
 
         $scope.boardDetailId = $stateParams.IdOrganization;
-
+        $scope.NewBoardModel = { Title:''};
          //console.log($location.search().boardId);
 
          console.log($scope.boardDetailId);
@@ -45,10 +45,11 @@ angular.module('app.controllers', [])
 
          $scope.getBoards = function () {
 
-             boardServices
+
+             BoardServices
                  .getBoardsForLoggedUser($scope.boardDetailId)
                .success(function (data, status, headers, config) {
-                   console.log(data);
+                   
                    $scope.boards = data;
                })
                .error(function (data, status, headers, config) {
@@ -59,15 +60,15 @@ angular.module('app.controllers', [])
 
          $scope.CreateBoard = function () {
              $location.path('/loading');
-             boardServices
-                 .createBoardsForLoggedUser($scope.boardDetailId)
+             BoardServices
+                 .createBoardsForLoggedUser($scope.NewBoardModel, $scope.boardDetailId)
                  .success(function(data, status, headers, config) {
-                     console.log(data);
+                    
                      $location.path('/boards/' + $scope.boardDetailId);
 
                  })
                  .error(function(data, status, headers, config) {
-                     console.log(data);
+                     console.log(data.Title);
                      $location.path('/createboard/' + $scope.boardDetailId);
                  });
          };
