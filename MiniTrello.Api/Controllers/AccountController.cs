@@ -79,7 +79,28 @@ namespace MiniTrello.Api.Controllers
         [POST("sendEmail")]
         public HttpResponseMessage sendEmail([FromBody] SendEmailModel model)
         {
-            SendSimpleMessage(model.Email, "Please click in the link to redirect you... *link not implemented*");
+            var account = _readOnlyRepository.First<Account>(account1 => account1.Email == model.Email);
+            Sessions newSession=null;
+            if (account != null)
+            {
+                newSession = new Sessions
+                {
+                    User = account,
+                    ExpireDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second).AddHours(24),
+                    LoginDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
+                    Token = Guid.NewGuid().ToString()
+                };
+
+                var sessionCreated = _writeOnlyRepository.Create(newSession);
+
+
+            }
+            string link=null;
+            if (newSession != null)
+            {
+               link = "http://minitrelloapidm.apphb.com/" + "ForgotPassword/"+newSession.Token;
+            }
+            SendSimpleMessage(model.Email, "Please click in the link to redirect you... "+link);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
@@ -121,7 +142,7 @@ namespace MiniTrello.Api.Controllers
             throw new BadRequestException("La clave debe contener por lo menos 1 numero y debe ser de 6 caracteres o mas.");
         }
 
-        [POST("/Account/ChangePassword/{token}")]
+        [POST("/ChangePassword/{token}")]
         public AccountLoginModel ChangePasword([FromBody] AccountChangePassword model, string token)
         {
             var session = _readOnlyRepository.First<Sessions>(session1 => session1.Token == token );
@@ -135,15 +156,15 @@ namespace MiniTrello.Api.Controllers
             throw new BadRequestException("Hubo un error al cambiar de Password"); 
         }
 
-        [POST("/Account/ForgotPassword")]
-        public AccountLoginModel ForgotPasword([FromBody] AccountForgotPasswordModel model)
+        [POST("/ForgotPassword/{token}")]
+        public AccountLoginModel ForgotPasword([FromBody] AccountForgotPasswordModel model,string token)
         {
-            var account = _readOnlyRepository.First<Account>(account1 => account1.Email == model.Email);
-           
+            var session = _readOnlyRepository.First<Sessions>(session1 => session1.Token == token);
+            ValidateSession(session);
             if (PasswordIsValid(model.NewPassword,model.ConfirmNewPassword))
             {
-                account.Password = model.NewPassword;
-                var accountUpdated = _writeOnlyRepository.Update(account);
+                session.User.Password = model.NewPassword;
+                var accountUpdated = _writeOnlyRepository.Update(session.User);
                 return new AccountLoginModel {Email = accountUpdated.Email, Password = accountUpdated.Password};;
             }
             throw new BadRequestException("Hubo un error al cambiar el password"); 
