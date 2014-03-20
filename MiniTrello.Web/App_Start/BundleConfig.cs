@@ -23,6 +23,7 @@ namespace App.MiniTrello.Web
                 "~/scripts/filters.js",
                 "~/scripts/services.js",
                 "~/scripts/AccountServices.js",
+                "~/scripts/LaneServices.js",
                 "~/scripts/OrganizationServices.js",
                 "~/scripts/BoardServices.js",
                 "~/scripts/directives.js",

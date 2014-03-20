@@ -28,7 +28,7 @@ namespace MiniTrello.Api.Controllers
             _readOnlyRepository = readOnlyRepository;
         }
 
-        [AcceptVerbs(new []{"DELETE"})]
+         [AcceptVerbs(new []{"DELETE"})]
          [DELETE("organization/{accessToken}")]
          public OrganizationModel Archive(string accessToken, [FromBody] OrganizationArchiveModel model)
          {

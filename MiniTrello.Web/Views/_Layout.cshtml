@@ -27,15 +27,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="./">MiniTrello</a>
+            <a class="navbar-brand" href="/" ng-hide="isLogged()">MiniTrello</a>
+            <a class="navbar-brand" href="/organizations" ng-show="isLogged()">MiniTrello</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="./organizations">Organizations</a></li>
-                <li><a href="./boards">Boards</a></li>
-                <li><a href="./createorganization">Create New Organization</a></li>
+                <li class="active"><a href="/organizations" ng-show="isLogged()">Organizations</a></li>
+                
+                <li><a href="/createorganization" ng-show="isLogged()">Create New Organization</a></li>
 
                 
 
@@ -52,10 +53,10 @@
                 </form>
                 
             </div>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" ng-model="UserName">
                 <li>
                     <a ng-hide="isLogged()" href="./login">Sign In</a>
-                    <a ng-show="isLogged()" href="#">Bienvenido {{UserName.Name}}</a>
+                    <a ng-show="isLogged()" href="#">Bienvenido {{UserName}}</a>
                     
                 
                 </li>

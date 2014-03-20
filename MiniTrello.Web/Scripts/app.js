@@ -53,6 +53,13 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
                 controller: 'BoardController'
             })
 
+            .state('lane', {
+                url: '/lane/:IdBoard',
+                layout: 'basic',
+                templateUrl: '/views/laneview',
+                controller: 'LaneController'
+            })
+
             .state('forgotpassword', {
                 url: '/forgotpassword/:tokencito',
                 layout: 'basic',

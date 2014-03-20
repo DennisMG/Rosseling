@@ -153,8 +153,69 @@ angular.module('app.controllers', [])
         });
     }])
 
-    .controller('AccountController', [
-        '$scope', '$location', '$window', 'AccountServices', '$stateParams', function ($scope, $location, $window, AccountServices, $stateParams) {
+    .controller('LaneController', ['$scope', '$location', '$window', 'LaneServices', '$stateParams', function($scope, $location, $window, LaneServices, $stateParams) {
+
+        $scope.goToLoadingPage = function () {
+            $location.path('/loading');
+        };
+            $scope.boardDetailId = $stateParams.boardId;
+
+            //console.log($location.search().boardId);
+
+            console.log($scope.boardDetailId);
+            $scope.NewOrganizationModel = { Name:'', Description:'' };
+    
+
+        $scope.organizations = [];
+
+        $scope.getOrganizationsForLoggedUser = function () {
+
+            organizationServices
+              .getOrganizationsForLoggedUser()
+              .success(function (data, status, headers, config) {
+                    $scope.organizations = data;
+                    console.log(data);
+
+                })
+              .error(function (data, status, headers, config) {
+                  console.log(data);
+              });
+            
+        };
+
+        $scope.CreateOrganizationsForLoggedUser = function () {
+            $scope.goToLoadingPage();
+
+            organizationServices
+                .createOrganizationsForLoggedUser($scope.NewOrganizationModel)
+              .success(function (data, status, headers, config) {
+                  console.log(data);
+                  $location.path('/organizations');
+
+                })
+              .error(function (data, status, headers, config) {
+                  console.log(data);
+                  $location.path('/createorganization');
+              });
+
+        };
+
+        if ($scope.boardDetailId > 0) {
+            //get board details
+        }
+        else {
+        $scope.getOrganizationsForLoggedUser();
+         }
+
+
+
+
+        $scope.$on('$viewContentLoaded', function () {
+            $window.ga('send', 'pageview', { 'page': $location.path(), 'title': $scope.$root.title });
+        });
+    }])
+
+    .controller('AccountController', ['$scope', '$location', '$window', 'AccountServices', '$stateParams', function ($scope, $location, $window, AccountServices, $stateParams) {
 
     $scope.hasError = false;
     $scope.errorMessage = '';
@@ -270,8 +331,7 @@ angular.module('app.controllers', [])
             $scope.$on('$viewContentLoaded', function() {
                 $window.ga('send', 'pageview', { 'page': $location.path(), 'title': $scope.$root.title });
             });
-        }
-    ]);
+        }]);
 
 
 

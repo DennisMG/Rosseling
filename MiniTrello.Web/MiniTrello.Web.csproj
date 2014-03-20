@@ -162,6 +162,7 @@
       <DependentUpon>filters.js</DependentUpon>
     </Content>
     <Content Include="Scripts\BoardController.js" />
+    <Content Include="Scripts\LaneServices.js" />
     <Content Include="Scripts\OrganizationServices.js" />
     <Content Include="Scripts\services.js" />
     <Content Include="Scripts\services.spec.js">
@@ -518,6 +519,7 @@
     <Content Include="Views\ForgotPasswordView.cshtml" />
     <Content Include="Views\CreateOrganizationView.cshtml" />
     <Content Include="Views\CreateNewBoardView.cshtml" />
+    <Content Include="Views\LaneView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
