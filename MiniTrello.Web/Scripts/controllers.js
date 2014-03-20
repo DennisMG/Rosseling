@@ -37,10 +37,10 @@ angular.module('app.controllers', [])
 
          $scope.boards = [];
 
-         var board = { Id: 1, Name: 'Myboard1', Description: 'Description1' };
+         /*var board = { Id: 1, Name: 'Myboard1', Description: 'Description1' };
          var board1 = { Id: 2, Name: 'Myboard2', Description: 'Description2' };
          $scope.boards.push(board);
-         $scope.boards.push(board1);
+         $scope.boards.push(board1);*/
 
 
          $scope.getBoards = function () {
@@ -153,7 +153,7 @@ angular.module('app.controllers', [])
 
     $scope.registerModel = { Email: '', Password: '', FirstName: '', LastName: '', ConfirmPassword: '' };
     $scope.AccountForgotPasswordModel = { Email: '', NewPassword: '', ConfirmNewPassword: '' };
-    $scope.UserName = { Name: '' };
+    $scope.UserName = 'Dennis_' ;
 
         $scope.logout = function() {
             delete $window.sessionStorage.token;
@@ -170,8 +170,8 @@ angular.module('app.controllers', [])
                     .success(function(data, status, headers, config) {
                         $scope.goToLoadingPage();
                         $window.sessionStorage.token = data.Token;
-                        $scope.UserName.Name = data.Name;
-                        console.log($scope.UserName.Name);
+                        $scope.UserName = data.Name;
+                        console.log($scope.UserName);
                         $location.path('/organizations');
                         
                     })
