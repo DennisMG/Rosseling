@@ -162,6 +162,7 @@
       <DependentUpon>filters.js</DependentUpon>
     </Content>
     <Content Include="Scripts\BoardController.js" />
+    <Content Include="Scripts\OrganizationServices.js" />
     <Content Include="Scripts\services.js" />
     <Content Include="Scripts\services.spec.js">
       <DependentUpon>services.js</DependentUpon>

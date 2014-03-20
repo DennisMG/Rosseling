@@ -26,7 +26,7 @@ angular.module('app.controllers', [])
         }
     ])
 
-     .controller('BoardController', ['$scope', '$location', '$window', '$stateParams', 'BoardServices', function ($scope, $location, $window, $stateParams, boardServices) {
+    .controller('BoardController', ['$scope', '$location', '$window', '$stateParams', 'BoardServices', function ($scope, $location, $window, $stateParams, boardServices) {
 
 
          $scope.boardDetailId = $stateParams.boardId;
@@ -74,6 +74,45 @@ angular.module('app.controllers', [])
              $window.ga('send', 'pageview', { 'page': $location.path(), 'title': $scope.$root.title });
          });
      }])
+
+    .controller('OrganizationController', ['$scope', '$location', '$window', 'OrganizationServices', '$stateParams', function ($scope, $location, $window, organizationServices, $stateParams) {
+
+
+        $scope.boardDetailId = $stateParams.boardId;
+
+        //console.log($location.search().boardId);
+
+        console.log($scope.boardDetailId);
+
+        $scope.organizations = [];
+
+        $scope.getOrganizationsForLoggedUser = function () {
+
+            organizationServices
+                .getOrganizationsForLoggedUser()
+              .success(function (data, status, headers, config) {
+                  $scope.organizations = data;
+              })
+              .error(function (data, status, headers, config) {
+                  console.log(data);
+              });
+            
+        };
+
+        if ($scope.boardDetailId > 0) {
+            //get board details
+        }
+        else {
+        $scope.getOrganizationsForLoggedUser();
+         }
+
+
+
+
+        $scope.$on('$viewContentLoaded', function () {
+            $window.ga('send', 'pageview', { 'page': $location.path(), 'title': $scope.$root.title });
+        });
+    }])
 
     .controller('AccountController', [
         '$scope', '$location', '$window', 'AccountServices', '$stateParams', function ($scope, $location, $window, AccountServices, $stateParams) {

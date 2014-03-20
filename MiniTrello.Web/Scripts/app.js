@@ -49,7 +49,7 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
             .state('organizations', {
                 url: '/organizations',
                 layout: 'basic',
-                templateUrl: '/views/organization',
+                templateUrl: '/views/organizations',
                 controller: 'OrganizationController'
             })
 
