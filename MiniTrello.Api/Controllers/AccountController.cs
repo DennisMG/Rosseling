@@ -115,7 +115,16 @@ namespace MiniTrello.Api.Controllers
             {
                 Account account = _mappingEngine.Map<AccountRegisterModel, Account>(model);
                 account.Password = EncryptPassword.EncryptString(account.Password, "password");
-                accountCreated = _writeOnlyRepository.Create(account);
+                var organization = new Organization {Name = "Organization Example", Description = "This is an example",};
+                account.AddOrganization(organization);
+                 accountCreated = _writeOnlyRepository.Create(account);
+                var organizationCreated = _writeOnlyRepository.Create(organization);
+                organizationCreated.AddBoard(new Board { Administrator = account, Title = "Board Example" });
+                var organizationUpdated = _writeOnlyRepository.Update(organizationCreated);
+                //var elementAtOrDefault = account.Organizations.ElementAtOrDefault(0);
+                //if (elementAtOrDefault != null)
+                    //elementAtOrDefault.AddBoard(new Board{Administrator = account,Title = "Board Example"});
+                //accountCreated = _writeOnlyRepository.Create(account);
             }
 
             

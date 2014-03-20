@@ -80,7 +80,7 @@ angular.module('app.controllers', [])
 
     $scope.hasError = false;
     $scope.errorMessage = '';
-        $scope.UserName = '';
+        
 
     $scope.isLogged = function() {
         return $window.sessionStorage.token != null;
@@ -90,9 +90,13 @@ angular.module('app.controllers', [])
     $scope.changePasswordModel = { Email: '' };
 
     $scope.registerModel = { Email: '', Password: '', FirstName: '', LastName: '', ConfirmPassword: '' };
-    $scope.AccountForgotPasswordModel = { Email: '', NewPassword: '',  ConfirmNewPassword: '' };
-       
-          
+    $scope.AccountForgotPasswordModel = { Email: '', NewPassword: '', ConfirmNewPassword: '' };
+    $scope.UserName = { Name: '' };
+
+        $scope.logout = function() {
+            delete $window.sessionStorage.token;
+            
+        };
             
             $scope.login = function () {
 
@@ -104,7 +108,8 @@ angular.module('app.controllers', [])
                     .success(function(data, status, headers, config) {
                         $scope.goToLoadingPage();
                         $window.sessionStorage.token = data.Token;
-                        $scope.UserName = data.Name;
+                        $scope.UserName.Name = data.Name;
+                        //console.log($scope.UserName);
                         $location.path('/boards');
                         
                     })

@@ -28,12 +28,16 @@ namespace MiniTrello.Api.Controllers
             _mappingEngine = mappingEngine;
         }
 
-       [POST("boards/createBoard/{Token}")]
-        public AccountBoardModel createNewBoard([FromBody] AccountBoardModel model,string Token)
+       [POST("createBoard/{IdOrganization}/{Token}")]
+        public AccountBoardModel createNewBoard([FromBody] AccountBoardModel model,long IdOrganization,string Token)
         {
-            var session = NewValidSession(Token);
+           var session = NewValidSession(Token);
+           Organization organization = _readOnlyRepository.GetById<Organization>(IdOrganization);
            var newBoard = new Board {Title = model.Title, Administrator = session.User, IsArchived = false};
-           session.User.AddBoard(newBoard);
+           organization.AddBoard(newBoard);
+           var organizacionUpdate = _writeOnlyRepository.Update(organization);
+           //var accountUpdate = _writeOnlyRepository.Update(session);
+           //session.User.AddBoard(newBoard);
            var BoardCreated = _writeOnlyRepository.Create(newBoard);
            return new AccountBoardModel { Title = BoardCreated.Title};
         }
@@ -45,7 +49,7 @@ namespace MiniTrello.Api.Controllers
         }
 
         [AcceptVerbs("PUT")]
-        [PUT("boards/ChangeBoardName/{IdBoard}/{Token}")]
+        [PUT("ChangeBoardName/{IdBoard}/{Token}")]
         public ChangeBoardNameModel ChangeBoardName([FromBody] ChangeBoardNameModel model, long IdBoard, string Token)
         {
             var session = NewValidSession(Token);
@@ -58,7 +62,7 @@ namespace MiniTrello.Api.Controllers
         }
 
         [AcceptVerbs(new[] { "DELETE" })]
-        [DELETE("boards/{Token}")]
+        [DELETE("deleteboard/{Token}")]
         public AccountBoardModel Archive(string Token, [FromBody] BoardArchiveModel model)
         {
             var session = NewValidSession(Token);
