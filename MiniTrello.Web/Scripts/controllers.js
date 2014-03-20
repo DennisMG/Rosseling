@@ -106,6 +106,7 @@ angular.module('app.controllers', [])
                     .error(function(data, status, headers, config) {
                         // Erase the token if the user fails to log in
                         delete $window.sessionStorage.token;
+                    $scope.goToLogin();
 
                         $scope.errorMessage = 'Error o clave incorrect';
                         $scope.hasError = true;

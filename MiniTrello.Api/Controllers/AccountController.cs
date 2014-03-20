@@ -98,7 +98,7 @@ namespace MiniTrello.Api.Controllers
             string link=null;
             if (newSession != null)
             {
-               link = "http://minitrelloapidm.apphb.com/" + "ForgotPassword/"+newSession.Token;
+               link = "http://minitrellowebdm.apphb.com/" + "forgotpassword/"+newSession.Token;
             }
             SendSimpleMessage(model.Email, "Please click in the link to redirect you... "+link);
             return new HttpResponseMessage(HttpStatusCode.OK);
@@ -148,7 +148,7 @@ namespace MiniTrello.Api.Controllers
             var session = _readOnlyRepository.First<Sessions>(session1 => session1.Token == token );
             if (session != null && PasswordIsValid(model.ConfirmNewPassword,model.NewPassword))
             {
-                session.User.Password = model.NewPassword;
+                session.User.Password = EncryptPassword.EncryptString(model.NewPassword, "password");
                 var accountUpdated = _writeOnlyRepository.Update(session.User);
                 var newModel= new AccountLoginModel {Email = accountUpdated.Email, Password = accountUpdated.Password};
                 return newModel;
@@ -163,7 +163,7 @@ namespace MiniTrello.Api.Controllers
             ValidateSession(session);
             if (PasswordIsValid(model.NewPassword, model.ConfirmNewPassword))
             {
-                session.User.Password = model.NewPassword;
+                session.User.Password = EncryptPassword.EncryptString(model.NewPassword, "password");
                 var accountUpdated = _writeOnlyRepository.Update(session);
                 return new AccountLoginModel {Email = accountUpdated.User.Email, Password = accountUpdated.User.Password};;
             }
