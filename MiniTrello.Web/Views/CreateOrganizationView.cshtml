@@ -1,0 +1,40 @@
+﻿@{
+    PageData["title"] = "Create Organization";
+}
+
+
+
+<div class="container" ng-app="app.controllers">
+
+    <div class="row" style="margin:100px">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form role="form">
+                <h2>Create New Organization</h2>
+                <hr class="colorgraph">
+
+
+                <div class="form-group">
+                    <input ng-model="NewOrganizationModel.Name" type="text" name="text" id="name" class="form-control input-lg" placeholder="Organization Name" tabindex="4">
+                    <input ng-model="NewOrganizationModel.Description" type="text" name="text" id="description" class="form-control input-lg" placeholder="Description" tabindex="4">
+                </div>
+
+
+
+                <hr class="colorgraph">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6"><input type="submit" ng-disabled="!(NewOrganizationModel.Description && NewOrganizationModel.Name)" disabled value="Create" class="btn btn-primary btn-block btn-lg" tabindex="7" ng-click="CreateOrganizationsForLoggedUser()"></div>
+                    <div class="col-xs-12 col-md-6"><a href="./organizations" class="btn btn-success btn-block btn-lg">Back</a></div>
+                    <div class="col-md-12">
+
+                    </div>
+
+
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+    <!-- Modal -->
+
+</div>

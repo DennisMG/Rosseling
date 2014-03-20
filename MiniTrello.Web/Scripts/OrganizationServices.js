@@ -12,6 +12,10 @@ angular.module('app.services').factory('OrganizationServices', ['$http', '$windo
         return $http.get(baseUrl + '/organizations/' + $window.sessionStorage.token);
     };
 
+    board.createOrganizationsForLoggedUser = function (data) {
+        return $http.post(baseUrl + '/organization/addorganization/' + $window.sessionStorage.token,data);
+    };
+
     return board;
 
 }]);

@@ -75,28 +75,51 @@ angular.module('app.controllers', [])
          });
      }])
 
-    .controller('OrganizationController', ['$scope', '$location', '$window', 'OrganizationServices', '$stateParams', function ($scope, $location, $window, organizationServices, $stateParams) {
+    .controller('OrganizationController', ['$scope', '$location', '$window', 'OrganizationServices', '$stateParams', function($scope, $location, $window, organizationServices, $stateParams) {
 
+        $scope.goToLoadingPage = function () {
+            $location.path('/loading');
+        };
+            $scope.boardDetailId = $stateParams.boardId;
 
-        $scope.boardDetailId = $stateParams.boardId;
+            //console.log($location.search().boardId);
 
-        //console.log($location.search().boardId);
-
-        console.log($scope.boardDetailId);
+            console.log($scope.boardDetailId);
+            $scope.NewOrganizationModel = { Name:'', Description:'' };
+    
 
         $scope.organizations = [];
 
         $scope.getOrganizationsForLoggedUser = function () {
 
             organizationServices
-                .getOrganizationsForLoggedUser()
+              .getOrganizationsForLoggedUser()
               .success(function (data, status, headers, config) {
-                  $scope.organizations = data;
-              })
+                    $scope.organizations = data;
+                    console.log(data);
+
+                })
               .error(function (data, status, headers, config) {
                   console.log(data);
               });
             
+        };
+
+        $scope.CreateOrganizationsForLoggedUser = function () {
+            $scope.goToLoadingPage();
+
+            organizationServices
+                .createOrganizationsForLoggedUser($scope.NewOrganizationModel)
+              .success(function (data, status, headers, config) {
+                  console.log(data);
+                  $location.path('/organizations');
+
+                })
+              .error(function (data, status, headers, config) {
+                  console.log(data);
+                  $location.path('/createorganization');
+              });
+
         };
 
         if ($scope.boardDetailId > 0) {
@@ -148,7 +171,7 @@ angular.module('app.controllers', [])
                         $scope.goToLoadingPage();
                         $window.sessionStorage.token = data.Token;
                         $scope.UserName.Name = data.Name;
-                        //console.log($scope.UserName);
+                        console.log($scope.UserName.Name);
                         $location.path('/boards');
                         
                     })
