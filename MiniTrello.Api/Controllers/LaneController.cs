@@ -28,7 +28,7 @@ namespace MiniTrello.Api.Controllers
             _mappingEngine = mappingEngine;
         }
 
-        [POST("lane/createlane/{BoardId}/{token}")]
+        [POST("createlane/{BoardId}/{token}")]
         public LaneModel CreateNewLane([FromBody] LaneModel model,string token,long BoardId)
         {
             var session = NewValidSession(token);
@@ -41,6 +41,17 @@ namespace MiniTrello.Api.Controllers
             if (laneCreated != null)
                 return new LaneModel{Name = laneCreated.Name};
             throw new BadRequestException("Failed creating new lane") ;
+        }
+
+        [GET("getlanes/{IdBoard}/{Token}")]
+        public List<LaneModel> GetAllForUser(string Token, int IdBoard)
+        {
+            var session = NewValidSession(Token);
+            ValidateSession(session);
+            var board = _readOnlyRepository.GetById<Board>(IdBoard);
+            var mappedLaneModelList = _mappingEngine.Map<IEnumerable<Lane>, IEnumerable<LaneModel>>(board.Lanes).ToList();
+            return mappedLaneModelList;
+            
         }
 
         private void ValidateSession(Sessions session)

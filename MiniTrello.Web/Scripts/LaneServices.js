@@ -8,12 +8,12 @@ angular.module('app.services').factory('LaneServices', ['$http', '$window', func
     var baseLocalUrl = "http://localhost:1416";
     var baseUrl = baseRemoteUrl;
 
-    lane.getOrganizationsForLoggedUser = function () {
-        return $http.get(baseUrl + '/organizations/' + $window.sessionStorage.token);
+    lane.getLanesForLoggedUser = function (IdBoard) {
+        return $http.get(baseUrl + '/getlanes/' + IdBoard + '/' + $window.sessionStorage.token);
     };
 
-    lane.createOrganizationsForLoggedUser = function (data) {
-        return $http.post(baseUrl + '/organization/addorganization/' + $window.sessionStorage.token, data);
+    lane.createLanesForLoggedUser = function (data, IdBoard) {
+        return $http.post(baseUrl + '/createlane/' + IdBoard + '/' + $window.sessionStorage.token, data);
     };
 
     return lane;

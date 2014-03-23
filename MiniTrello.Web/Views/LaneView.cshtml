@@ -1,17 +1,55 @@
 ﻿@{
-    Layout = null;
+    PageData["title"] = "Lanes";
 }
 
-<!DOCTYPE html>
+<div class="container">
+    <div class="row" ng-repeat="lane in lanes">
+        <div class="col-sm-3 col-md-3">
+            <div class="panel-group" id="accordion">
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                                <span class="glyphicon glyphicon-heart">
+                                </span>{{board.Title}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseFive" class="panel-collapse collapse">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">List group item heading</h4>
+                                <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                            </a>
+                        </div>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item active">
+                                <h4 class="list-group-item-heading">List group item heading</h4>
+                                <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                            </a>
+                        </div>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">List group item heading</h4>
+                                <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9 col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Dashboard</h3>
+                </div>
+                <div class="panel-body">
+                    <p>Admin Dashboard Accordion List Group Menu</p>
+                    <div class="alert alert-success"><h3>Yes! It's compatible with BS 3.0.3 & 3.1</h3></div>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+</div>

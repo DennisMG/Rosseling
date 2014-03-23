@@ -37,14 +37,8 @@ namespace MiniTrello.Api.Controllers
                throw new BadRequestException("Session has expired. Please login again.");
 
            Organization organization = _readOnlyRepository.GetById<Organization>(IdOrganization);
-          
-           
-
-           //var newBoard = new Board {Title = model.Title, Administrator = session.User, IsArchived = false};
            organization.AddBoard(Board);
            var organizacionUpdate = _writeOnlyRepository.Update(organization);
-           //var accountUpdate = _writeOnlyRepository.Update(session);
-           //session.User.AddBoard(newBoard);
            var BoardCreated = _writeOnlyRepository.Create(Board);
            return new AccountBoardModel { Title = BoardCreated.Title};
         }

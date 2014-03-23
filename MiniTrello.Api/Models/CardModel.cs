@@ -7,6 +7,7 @@ namespace MiniTrello.Api.Models
 {
     public class CardModel
     {
+        public long Id { get; set; }
         public string Content { get; set; }
     }
 }
