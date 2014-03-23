@@ -61,7 +61,7 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
             })
 
             .state('forgotpassword', {
-                url: '/forgotpassword/:tokencito',
+                url: '/forgotpassword/:Token',
                 layout: 'basic',
                 templateUrl: '/views/forgotpasswordview',
                 controller: 'AccountController'

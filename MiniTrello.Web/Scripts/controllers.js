@@ -311,10 +311,10 @@ angular.module('app.controllers', [])
             $scope.forgotpassword = function () {
                 
                 $scope.goToLoadingPage();
-                //$scope.sessionStorage.token = $stateParams.token;
-                console.log($stateParams.tokencito);
+                //$scope.sessionStorage.token = $stateParams.Token;
+                //console.log($scope.sessionStorage.token);
                 console.log($scope.AccountForgotPasswordModel);
-                AccountServices.forgotPassword($scope.AccountForgotPasswordModel, $stateParams.tokencito)
+                AccountServices.forgotPassword($stateParams.Token, $scope.AccountForgotPasswordModel)
                     .success(function (data, status, headers, config) {
 
                         console.log(data);

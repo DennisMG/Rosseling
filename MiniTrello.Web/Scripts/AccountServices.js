@@ -16,7 +16,7 @@ angular.module('app.services', []).factory('AccountServices', ['$http', function
         return $http.post('http://minitrelloapidm.apphb.com/register', data);
     };
 
-    account.forgotPassword = function (data,token) {
+    account.forgotPassword = function (token,data) {
         return $http.post('http://minitrelloapidm.apphb.com/forgotpassword/' + token, data);
     };
 
