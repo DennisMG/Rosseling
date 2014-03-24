@@ -33,6 +33,7 @@ namespace MiniTrello.Api.Controllers
         {
            var Board = _mappingEngine.Map<AccountBoardModel, Board>(model);
            var session = _readOnlyRepository.First<Sessions>(session1 => session1.Token == Token);
+           Board.Administrator = session.User;
            if (session == null || !session.IsTokenActive())
                throw new BadRequestException("Session has expired. Please login again.");
 

@@ -40,7 +40,7 @@ namespace MiniTrello.Api.Controllers
             var boardUpdated = _writeOnlyRepository.Update(board);
             var laneCreated = _writeOnlyRepository.Create(newLane);
             if (laneCreated != null)
-                return new LaneModel{Name = laneCreated.Name};
+                return new LaneModel{ Id=laneCreated.Id, Name = laneCreated.Name};
             throw new BadRequestException("Failed creating new lane") ;
         }
 
