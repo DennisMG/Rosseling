@@ -16,8 +16,8 @@ angular.module('app.services').factory('LaneServices', ['$http', '$window', func
         return $http.post(baseUrl + '/createlane/' + IdBoard + '/' + $window.sessionStorage.token, data);
     };
 
-    lane.getCardsForLane = function ( IdLane) {
-        return $http.get(baseUrl + '/getcards/' + IdLane + '/' + $window.sessionStorage.token);
+    lane.getCardsForLane = function ( LaneId) {
+        return $http.get(baseUrl + '/getcards/' + LaneId + '/' + $window.sessionStorage.token);
     };
 
     return lane;

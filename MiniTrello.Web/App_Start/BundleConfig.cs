@@ -27,6 +27,7 @@ namespace App.MiniTrello.Web
                 "~/scripts/OrganizationServices.js",
                 "~/scripts/BoardServices.js",
                 "~/scripts/directives.js",
+                "~/scripts/bootstrap-collapse.js",
                 "~/scripts/BoardController.js",
                 "~/scripts/controllers.js",
                 "~/scripts/app.js"));

@@ -175,16 +175,17 @@ angular.module('app.controllers', [])
                 .success(function (data, status, headers, config) {
                     
                     console.log(data);
-                    $location.path('/lanes/' + $scope.boardId);
+                    $location.path('/lane/' + $scope.boardId);
 
 
                 })
                     .error(function (data, status, headers, config) {
                         console.log(data);
-                        $location.path('/lanes/' + $scope.boardId);
+                        $location.path('/lane/' + $scope.boardId);
                     });
             };
             $scope.getLanesForLoggedUser = function () {
+                
                 LaneServices
                     .getLanesForLoggedUser($scope.boardId)
                     .success(function (data, status, headers, config) {
@@ -197,12 +198,12 @@ angular.module('app.controllers', [])
                     });
 
             };
-           /* $scope.getCardsForLoggedUser = function() {
-                $scope.goToLoadingPage();
+           $scope.getCardsForLoggedUser = function(LaneId) {
+                //$scope.goToLoadingPage();
                 LaneServices
-                .getCardsForLane(idLane)
+                .getCardsForLane(LaneId)
                 .success(function (data) {
-                    $scope.lanes = data;
+                    $scope.cards = data;
                     console.log(data);
                     $location.path('/lanes/' + $scope.boardId);
 
@@ -213,7 +214,7 @@ angular.module('app.controllers', [])
                         $location.path('/organizations');
                     });
 
-            };*/
+            };
 
            /* if ($scope.lanes.length > 0)
             {

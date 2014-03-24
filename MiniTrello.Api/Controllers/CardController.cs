@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Web.Http;
 using AttributeRouting.Web.Http;
 using AutoMapper;
+using FizzWare.NBuilder;
 using MiniTrello.Api.Models;
 using MiniTrello.Domain.Entities;
 using MiniTrello.Domain.Services;
@@ -78,10 +79,10 @@ namespace MiniTrello.Api.Controllers
             var session = NewValidSession(Token);
             ValidateSession(session);
             var lane = _readOnlyRepository.GetById<Lane>(IdLane);
-            var mappedOrganizationModelList = _mappingEngine.Map<IEnumerable<Card>, IEnumerable<CardModel>>(lane.Cards).ToList();
-            return mappedOrganizationModelList;
-            //var boards = Builder<AccountBoardModel>.CreateListOfSize(10).Build().ToList();
-            //return boards;
+            //var mappedOrganizationModelList = _mappingEngine.Map<IEnumerable<Card>, IEnumerable<CardModel>>(lane.Cards).ToList();
+            //return mappedOrganizationModelList;
+            var boards = Builder<CardModel>.CreateListOfSize(10).Build().ToList();
+            return boards;
         }
 
         public Sessions NewValidSession(string token)

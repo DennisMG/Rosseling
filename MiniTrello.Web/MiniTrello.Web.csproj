@@ -149,6 +149,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\AccountServices.js" />
     <Content Include="Scripts\BoardServices.js" />
+    <Content Include="Scripts\bootstrap-collapse.js" />
     <Content Include="Scripts\controllers.js" />
     <Content Include="Scripts\controllers.spec.js">
       <DependentUpon>controllers.js</DependentUpon>
