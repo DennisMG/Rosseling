@@ -3,12 +3,12 @@
 }
 
 <div class="container">
-    <div class="row" ng-repeat="organization in organizations">
-        <div class="col-md-6">
+    <div class="row" >
+        <div class="col-md-6" ng-repeat="organization in organizations">
             <div class="well well-sm">
                 <div class="row">
                     <div class="col-xs-3 col-md-3 text-center">
-                        <img src="http://bootsnipp.com/apple-touch-icon-114x114-precomposed.png" alt="bootsnipp"
+                        <img src="https://scontent-b-mia.xx.fbcdn.net/hphotos-prn2/t1.0-9/1912368_10151976939107844_450876331_n.jpg" alt="bootsnipp"
                              class="img-rounded img-responsive" />
                     </div>
                     <div class="col-xs-9 col-md-9 section-box">
@@ -22,13 +22,13 @@
                             {{organization.Description}}
                         </p>
 
+
                         <hr />
                         <div class="row rating-desc">
                             <div class="col-md-12">
-                                <span class="glyphicon glyphicon-heart"></span><span class="glyphicon glyphicon-heart">
-                                </span><span class="glyphicon glyphicon-heart"></span><span class="glyphicon glyphicon-heart">
-                                </span><span class="glyphicon glyphicon-heart"></span>(36)<span class="separator">|</span>
-                                <span class="glyphicon glyphicon-comment"></span>(100 Comments)<span class="separator">|</span><a href="/createboard/{{organization.Id}}">+ Add Board</a>
+                                <button type="button" class="btn btn-labeled btn-danger">
+                                    <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Trash
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -37,3 +37,5 @@
         </div>
     </div>
 </div>
+
+

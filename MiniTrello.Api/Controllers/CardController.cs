@@ -26,7 +26,7 @@ namespace MiniTrello.Api.Controllers
             _mappingEngine = mappingEngine;
         }
 
-        [POST("card/addcard/{LaneId}/{token}")]
+        [POST("addcard/{LaneId}/{token}")]
         public CardModel AddNewCard([FromBody] CardModel model, string token, long LaneId)
         {
             var session = NewValidSession(token);
@@ -70,6 +70,18 @@ namespace MiniTrello.Api.Controllers
             return new HttpResponseMessage(HttpStatusCode.OK);
 
 
+        }
+
+        [GET("getcards/{IdLane}/{Token}")]
+        public List<CardModel> GetAllForUser(string Token, int IdLane)
+        {
+            var session = NewValidSession(Token);
+            ValidateSession(session);
+            var lane = _readOnlyRepository.GetById<Lane>(IdLane);
+            var mappedOrganizationModelList = _mappingEngine.Map<IEnumerable<Card>, IEnumerable<CardModel>>(lane.Cards).ToList();
+            return mappedOrganizationModelList;
+            //var boards = Builder<AccountBoardModel>.CreateListOfSize(10).Build().ToList();
+            //return boards;
         }
 
         public Sessions NewValidSession(string token)

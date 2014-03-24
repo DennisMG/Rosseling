@@ -52,16 +52,19 @@ angular.module('app.controllers', [])
 
             $scope.CreateBoard = function() {
                 $location.path('/loading');
+                console.log($scope.NewBoardModel);
                 BoardServices
+                
                     .createBoardsForLoggedUser($scope.NewBoardModel, $scope.organizationID)
                     .success(function(data, status, headers, config) {
-
+                        console.log($scope.NewBoardModel);
                         $location.path('/boards/' + $scope.organizationID);
 
                     })
                     .error(function(data, status, headers, config) {
                         console.log(data.Title);
-                        $location.path('/createboard/' + $scope.organizationID);
+                        console.log($scope.NewBoardModel);
+                        //$location.path('/createboard/' + $scope.organizationID);
                     });
             };
 
@@ -81,6 +84,8 @@ angular.module('app.controllers', [])
             $scope.goToLoadingPage = function() {
                 $location.path('/loading');
             };
+
+            
             $scope.boardDetailId = $stateParams.boardId;
 
             //console.log($location.search().boardId);
@@ -136,23 +141,56 @@ angular.module('app.controllers', [])
         }
     ])
     .controller('LaneController', [
-        '$scope', '$location', '$window', 'LaneServices', '$stateParams', function($scope, $location, $window, LaneServices, $stateParams) {
+        '$scope', '$location', '$window', 'LaneServices', '$stateParams',  function($scope, $location, $window, LaneServices, $stateParams) {
 
             $scope.goToLoadingPage = function() {
                 $location.path('/loading');
             };
             $scope.boardId = $stateParams.IdBoard;
-            $scope.NewLaneModel = { Name: '' };
+            $scope.NewLaneModel = {Id: '', Name: ''};
+            $scope.NewLaneName = { Name: ''};
+
+            
+            
 
 
             $scope.lanes = [];
+            $scope.cards = [];
+            console.log($scope.boardId);
+            /*var lane = { Name: 'Lane1' };
+            var lane1 = { Name: 'Lane2' };
+            var lane2 = { Name: 'Lane3' };
+            var lane3 = { Name: 'Lane2' };
+            var lane4 = { Name: 'Lane3' };
+            $scope.lanes.push(lane);
+            $scope.lanes.push(lane1);
+            $scope.lanes.push(lane2);
+            $scope.lanes.push(lane3);
+            $scope.lanes.push(lane4);*/
 
-            $scope.getLanesForLoggedUser = function() {
+
+            $scope.createLane = function () {
                 $scope.goToLoadingPage();
+                LaneServices.createLanesForLoggedUser($scope.NewLaneModel, $scope.boardId)
+                .success(function (data, status, headers, config) {
+                    
+                    console.log(data);
+                    $location.path('/lanes/' + $scope.boardId);
+
+
+                })
+                    .error(function (data, status, headers, config) {
+                        console.log(data);
+                        $location.path('/lanes/' + $scope.boardId);
+                    });
+            };
+            $scope.getLanesForLoggedUser = function() {
+                //$scope.goToLoadingPage();
                 LaneServices
-                    .getLanesForLoggedUser()
-                    .success(function(data, status, headers, config) {
+                    .getLanesForLoggedUser($scope.boardId)
+                    .success(function(data) {
                         $scope.lanes = data;
+                        console.log(data);
                         $location.path('/lanes/' + $scope.boardId);
                         
 
@@ -163,29 +201,45 @@ angular.module('app.controllers', [])
                     });
 
             };
-
-            $scope.CreateOrganizationsForLoggedUser = function() {
+           /* $scope.getCardsForLoggedUser = function() {
                 $scope.goToLoadingPage();
+                LaneServices
+                .getCardsForLane(idLane)
+                .success(function (data) {
+                    $scope.lanes = data;
+                    console.log(data);
+                    $location.path('/lanes/' + $scope.boardId);
 
-                organizationServices
-                    .createOrganizationsForLoggedUser($scope.NewOrganizationModel)
-                    .success(function(data, status, headers, config) {
+
+                })
+                    .error(function (data, status, headers, config) {
                         console.log(data);
                         $location.path('/organizations');
-
-                    })
-                    .error(function(data, status, headers, config) {
-                        console.log(data);
-                        $location.path('/createorganization');
                     });
 
-            };
+            };*/
 
-            if ($scope.boardDetailId > 0) {
-                //get board details
-            } else {
-                $scope.getOrganizationsForLoggedUser();
+            if ($scope.lanes.length > 0)
+            {
+                $scope.getLanesForLoggedUser($scope.boardId);
             }
+            else
+            {
+                var lane = { Name: 'Lane1' };
+                var lane1 = { Name: 'Lane2' };
+                var lane2 = { Name: 'Lane3' };
+                var lane3 = { Name: 'Lane2' };
+                var lane4 = { Name: 'Lane3' };
+                $scope.lanes.push(lane);
+                $scope.lanes.push(lane1);
+                $scope.lanes.push(lane2);
+                $scope.lanes.push(lane3);
+                $scope.lanes.push(lane4);
+            }
+
+            
+                
+            
 
 
             $scope.$on('$viewContentLoaded', function() {
@@ -206,7 +260,6 @@ angular.module('app.controllers', [])
 
             $scope.loginModel = { Email: '', Password: '' };
             $scope.changePasswordModel = { Email: '' };
-
             $scope.registerModel = { Email: '', Password: '', FirstName: '', LastName: '', ConfirmPassword: '' };
             $scope.AccountForgotPasswordModel = { Email: '', NewPassword: '', ConfirmNewPassword: '' };
             $scope.UserName = '';
