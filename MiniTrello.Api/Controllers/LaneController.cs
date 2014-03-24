@@ -34,7 +34,6 @@ namespace MiniTrello.Api.Controllers
             var session = NewValidSession(token);
             ValidateSession(session);
             var board = _readOnlyRepository.GetById<Board>(BoardId);
-            VerifyAdministrator(session.User, board.Administrator);
             var newLane = new Lane{ Name = model.Name};
             board.AddLane(newLane);
             var laneCreated = _writeOnlyRepository.Create(newLane);
