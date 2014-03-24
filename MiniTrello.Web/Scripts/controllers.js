@@ -156,7 +156,7 @@ angular.module('app.controllers', [])
 
             $scope.lanes = [];
             $scope.cards = [];
-            console.log($scope.boardId);
+            
             /*var lane = { Name: 'Lane1' };
             var lane1 = { Name: 'Lane2' };
             var lane2 = { Name: 'Lane3' };
@@ -184,20 +184,17 @@ angular.module('app.controllers', [])
                         $location.path('/lanes/' + $scope.boardId);
                     });
             };
-            $scope.getLanesForLoggedUser = function() {
-                //$scope.goToLoadingPage();
+            $scope.getLanesForLoggedUser = function () {
+
                 LaneServices
                     .getLanesForLoggedUser($scope.boardId)
-                    .success(function(data) {
+                    .success(function (data, status, headers, config) {
                         $scope.lanes = data;
                         console.log(data);
-                        $location.path('/lanes/' + $scope.boardId);
-                        
 
                     })
-                    .error(function(data, status, headers, config) {
+                    .error(function (data, status, headers, config) {
                         console.log(data);
-                        $location.path('/organizations');
                     });
 
             };
@@ -219,7 +216,7 @@ angular.module('app.controllers', [])
 
             };*/
 
-            if ($scope.lanes.length > 0)
+           /* if ($scope.lanes.length > 0)
             {
                 $scope.getLanesForLoggedUser($scope.boardId);
             }
@@ -235,7 +232,9 @@ angular.module('app.controllers', [])
                 $scope.lanes.push(lane2);
                 $scope.lanes.push(lane3);
                 $scope.lanes.push(lane4);
-            }
+            }*/
+
+            $scope.getLanesForLoggedUser();
 
             
                 

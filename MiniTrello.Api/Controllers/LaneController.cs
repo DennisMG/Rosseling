@@ -49,10 +49,10 @@ namespace MiniTrello.Api.Controllers
             var session = NewValidSession(Token);
             ValidateSession(session);
             var board = _readOnlyRepository.GetById<Board>(IdBoard);
-            //var mappedLaneModelList = _mappingEngine.Map<IEnumerable<Lane>, IEnumerable<LaneModel>>(board.Lanes).ToList();
-            //return mappedLaneModelList;
-            var lanes = Builder<LaneModel>.CreateListOfSize(10).Build().ToList();
-            return lanes;
+            var mappedLaneModelList = _mappingEngine.Map<IEnumerable<Lane>, IEnumerable<LaneModel>>(board.Lanes).ToList();
+            return mappedLaneModelList;
+            //var lanes = Builder<LaneModel>.CreateListOfSize(10).Build().ToList();
+            //return lanes;
             
         }
 
