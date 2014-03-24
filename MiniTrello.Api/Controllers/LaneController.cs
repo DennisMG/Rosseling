@@ -37,6 +37,7 @@ namespace MiniTrello.Api.Controllers
             var board = _readOnlyRepository.GetById<Board>(BoardId);
             var newLane = new Lane{ Name = model.Name};
             board.AddLane(newLane);
+            var boardUpdated = _writeOnlyRepository.Update(board);
             var laneCreated = _writeOnlyRepository.Create(newLane);
             if (laneCreated != null)
                 return new LaneModel{Name = laneCreated.Name};

@@ -185,7 +185,6 @@ angular.module('app.controllers', [])
                     });
             };
             $scope.getLanesForLoggedUser = function () {
-
                 LaneServices
                     .getLanesForLoggedUser($scope.boardId)
                     .success(function (data, status, headers, config) {

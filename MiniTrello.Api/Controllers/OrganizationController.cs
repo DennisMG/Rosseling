@@ -61,9 +61,7 @@ namespace MiniTrello.Api.Controllers
         public List<OrganizationModel> GetAllForUser(string Token)
         {
             var session = NewValidSession(Token);
-            //obtener el usuario que pertenece al token
-            //validar la session
-            //var account = _readOnlyRepository.GetById<Account>(1);
+           
             var mappedOrganizationModelList = _mappingEngine.Map<IEnumerable<Organization>,IEnumerable<OrganizationModel >> (session.User.Organizations).ToList();
             return mappedOrganizationModelList;
             //var organizations = Builder<OrganizationModel>.CreateListOfSize(10).Build().ToList();
