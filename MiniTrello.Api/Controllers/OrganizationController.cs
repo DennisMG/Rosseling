@@ -61,9 +61,8 @@ namespace MiniTrello.Api.Controllers
         public List<OrganizationModel> GetAllForUser(string Token)
         {
             var session = NewValidSession(Token);
-           
             var mappedOrganizationModelList = _mappingEngine.Map<IEnumerable<Organization>,IEnumerable<OrganizationModel >> (session.User.Organizations).ToList();
-            return mappedOrganizationModelList;
+            return mappedOrganizationModelList.Where(organization => !organization.IsArchived).ToList();
             //var organizations = Builder<OrganizationModel>.CreateListOfSize(10).Build().ToList();
             //return organizations;
         }

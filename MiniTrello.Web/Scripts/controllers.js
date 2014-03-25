@@ -90,7 +90,7 @@ angular.module('app.controllers', [])
             $scope.boardDetailId = $stateParams.boardId;
             console.log($scope.boardDetailId);
             $scope.NewOrganizationModel = { Name: '', Description: '' };
-            $scope.OrganizationArchiveModel = { Id: '' };
+            $scope.OrganizationArchiveModel = { Id: 0 };
 
             $scope.organizations = [];
 
@@ -130,6 +130,7 @@ angular.module('app.controllers', [])
 
             $scope.DeleteOrganization = function (idOrganization) {
                 $scope.OrganizationArchiveModel.Id = idOrganization;
+                console.log($scope.OrganizationArchiveModel);
                 organizationServices
                     .deleteOrganization($scope.OrganizationArchiveModel)
                     .success(function (data) {

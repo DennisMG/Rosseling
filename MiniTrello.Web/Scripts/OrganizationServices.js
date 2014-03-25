@@ -17,7 +17,7 @@ angular.module('app.services').factory('OrganizationServices', ['$http', '$windo
     };
 
     organization.deleteOrganization = function(data) {
-        return $http.delete('minitrelloapidm.apphb.com/organization/' + $window.sessionStorage.token, data);
+        return $http.delete(baseUrl + '/organization/' + $window.sessionStorage.token, data);
     };
 
     return organization;
