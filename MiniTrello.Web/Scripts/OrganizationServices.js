@@ -16,6 +16,10 @@ angular.module('app.services').factory('OrganizationServices', ['$http', '$windo
         return $http.post(baseUrl + '/organization/addorganization/' + $window.sessionStorage.token,data);
     };
 
+    organization.deleteOrganization = function(data) {
+        return $http.delete('minitrelloapidm.apphb.com/organization/' + $window.sessionStorage.token, data);
+    };
+
     return organization;
 
 }]);

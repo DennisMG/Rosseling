@@ -33,8 +33,8 @@ namespace MiniTrello.Api.Controllers
          public OrganizationModel Archive(string accessToken, [FromBody] OrganizationArchiveModel model)
          {
              var organization = _readOnlyRepository.GetById<Organization>(model.Id);
-             var archivedOrganization = _writeOnlyRepository.Archive(organization);
-             return _mappingEngine.Map<Organization, OrganizationModel>(archivedOrganization);
+            var archivedOrganization = _writeOnlyRepository.Archive(organization);
+            return _mappingEngine.Map<Organization, OrganizationModel>(archivedOrganization);
          }
 
         [GET("organization/{organizationId}/{accessToken}")]

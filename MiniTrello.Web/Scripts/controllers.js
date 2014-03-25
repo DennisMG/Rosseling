@@ -51,14 +51,15 @@ angular.module('app.controllers', [])
             };
 
             $scope.CreateBoard = function() {
-                $location.path('/loading');
+               // $location.path('/loading');
                 console.log($scope.NewBoardModel);
                 BoardServices
                 
                     .createBoardsForLoggedUser($scope.NewBoardModel, $scope.organizationID)
                     .success(function(data, status, headers, config) {
                         console.log($scope.NewBoardModel);
-                        $location.path('/boards/' + $scope.organizationID);
+                        $scope.getBoards();
+                        //$location.path('/boards/' + $scope.organizationID);
 
                     })
                     .error(function(data, status, headers, config) {
@@ -87,12 +88,9 @@ angular.module('app.controllers', [])
 
             
             $scope.boardDetailId = $stateParams.boardId;
-
-            //console.log($location.search().boardId);
-
             console.log($scope.boardDetailId);
             $scope.NewOrganizationModel = { Name: '', Description: '' };
-
+            $scope.OrganizationArchiveModel = { Id: '' };
 
             $scope.organizations = [];
 
@@ -112,20 +110,39 @@ angular.module('app.controllers', [])
             };
 
             $scope.CreateOrganizationsForLoggedUser = function() {
-                $scope.goToLoadingPage();
+                //$scope.goToLoadingPage();
 
                 organizationServices
                     .createOrganizationsForLoggedUser($scope.NewOrganizationModel)
                     .success(function(data, status, headers, config) {
                         console.log(data);
-                        $location.path('/organizations');
+                        $scope.getOrganizationsForLoggedUser();
+                        //$scope.$apply()
+                        //$location.path('/organizations');
 
                     })
                     .error(function(data, status, headers, config) {
                         console.log(data);
-                        $location.path('/createorganization');
+                        //$location.path('/createorganization');
                     });
 
+            };
+
+            $scope.DeleteOrganization = function (idOrganization) {
+                $scope.OrganizationArchiveModel.Id = idOrganization;
+                organizationServices
+                    .deleteOrganization($scope.OrganizationArchiveModel)
+                    .success(function (data) {
+                        console.log(data);
+                        $scope.getOrganizationsForLoggedUser();
+                        
+
+                    })
+                    .error(function (data, status, headers, config) {
+                        console.log(data);
+                        
+                    });
+                
             };
 
             if ($scope.boardDetailId > 0) {
@@ -150,32 +167,16 @@ angular.module('app.controllers', [])
             $scope.NewLaneModel = {Id: '', Name: ''};
             $scope.NewLaneName = { Name: ''};
 
-            
-            
-
-
             $scope.lanes = [];
-            $scope.cards = [];
+            //$scope.cards = [];
             
-            /*var lane = { Name: 'Lane1' };
-            var lane1 = { Name: 'Lane2' };
-            var lane2 = { Name: 'Lane3' };
-            var lane3 = { Name: 'Lane2' };
-            var lane4 = { Name: 'Lane3' };
-            $scope.lanes.push(lane);
-            $scope.lanes.push(lane1);
-            $scope.lanes.push(lane2);
-            $scope.lanes.push(lane3);
-            $scope.lanes.push(lane4);*/
-
-
             $scope.createLane = function () {
-                $scope.goToLoadingPage();
+                //$scope.goToLoadingPage();
                 LaneServices.createLanesForLoggedUser($scope.NewLaneModel, $scope.boardId)
                 .success(function (data, status, headers, config) {
-                    
+                    $scope.getLanesForLoggedUser();
                     console.log(data);
-                    $location.path('/lane/' + $scope.boardId);
+                    //$location.path('/lane/' + $scope.boardId);
 
 
                 })
@@ -198,48 +199,8 @@ angular.module('app.controllers', [])
                     });
 
             };
-           $scope.getCardsForLoggedUser = function(LaneId) {
-                //$scope.goToLoadingPage();
-                LaneServices
-                .getCardsForLane(LaneId)
-                .success(function (data) {
-                    $scope.cards = data;
-                    console.log(data);
-                    $location.path('/lanes/' + $scope.boardId);
-
-
-                })
-                    .error(function (data, status, headers, config) {
-                        console.log(data);
-                        $location.path('/organizations');
-                    });
-
-            };
-
-           /* if ($scope.lanes.length > 0)
-            {
-                $scope.getLanesForLoggedUser($scope.boardId);
-            }
-            else
-            {
-                var lane = { Name: 'Lane1' };
-                var lane1 = { Name: 'Lane2' };
-                var lane2 = { Name: 'Lane3' };
-                var lane3 = { Name: 'Lane2' };
-                var lane4 = { Name: 'Lane3' };
-                $scope.lanes.push(lane);
-                $scope.lanes.push(lane1);
-                $scope.lanes.push(lane2);
-                $scope.lanes.push(lane3);
-                $scope.lanes.push(lane4);
-            }*/
 
             $scope.getLanesForLoggedUser();
-
-            
-                
-            
-
 
             $scope.$on('$viewContentLoaded', function() {
                 $window.ga('send', 'pageview', { 'page': $location.path(), 'title': $scope.$root.title });

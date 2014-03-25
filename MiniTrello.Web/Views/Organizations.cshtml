@@ -1,7 +1,15 @@
 ﻿@{
     Layout = null;
 }
-
+<form class="form-inline" role="form" ng-app="app.controllers">
+    <div class="form-group">
+        <label class="sr-only" for="exampleInputEmail2">Email address</label>
+        <input ng-model=" NewOrganizationModel.Name" type="text" class="form-control" id="name" placeholder="Name">
+        <input ng-model=" NewOrganizationModel.Description" type="text" class="form-control" id="name" placeholder="Description">
+    </div>
+    <button type="submit" class="btn btn-default" ng-click="CreateOrganizationsForLoggedUser()">Add new organization</button>
+</form>
+<br>
 <div class="container">
     <div class="row" >
         <div class="col-md-6" ng-repeat="organization in organizations">
@@ -26,7 +34,7 @@
                         <hr />
                         <div class="row rating-desc">
                             <div class="col-md-12">
-                                <button type="button" class="btn btn-labeled btn-danger">
+                                <button type="button" class="btn btn-labeled btn-danger" ng-click="DeleteOrganization(organization.Id)">
                                     <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Trash
                                 </button>
                             </div>
