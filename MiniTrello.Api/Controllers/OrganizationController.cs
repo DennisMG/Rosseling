@@ -29,12 +29,13 @@ namespace MiniTrello.Api.Controllers
         }
 
          [AcceptVerbs("DELETE")]
-         [DELETE("organization/{accessToken}")]
-         public OrganizationModel Archive(string accessToken, [FromBody] OrganizationArchiveModel model)
+         [DELETE("organization/{organizationId}/{accessToken}")]
+         public OrganizationModel Archive(long organizationId, string accessToken)
          {
-             var organization = _readOnlyRepository.GetById<Organization>(model.Id);
-            var archivedOrganization = _writeOnlyRepository.Archive(organization);
-            return _mappingEngine.Map<Organization, OrganizationModel>(archivedOrganization);
+
+             var organization = _readOnlyRepository.GetById<Organization>(organizationId);
+             var archivedOrganization = _writeOnlyRepository.Archive(organization);
+             return _mappingEngine.Map<Organization, OrganizationModel>(archivedOrganization);
          }
 
         [GET("organization/{organizationId}/{accessToken}")]

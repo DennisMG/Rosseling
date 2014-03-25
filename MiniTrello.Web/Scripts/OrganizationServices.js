@@ -16,8 +16,8 @@ angular.module('app.services').factory('OrganizationServices', ['$http', '$windo
         return $http.post(baseUrl + '/organization/addorganization/' + $window.sessionStorage.token,data);
     };
 
-    organization.deleteOrganization = function(data) {
-        return $http.delete(baseUrl + '/organization/' + $window.sessionStorage.token, data);
+    organization.deleteOrganization = function(OrgaId) {
+        return $http.delete(baseUrl + '/organization/'+ OrgaId +'/' + $window.sessionStorage.token);
     };
 
     return organization;

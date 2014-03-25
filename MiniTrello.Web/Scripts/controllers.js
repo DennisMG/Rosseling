@@ -80,7 +80,7 @@ angular.module('app.controllers', [])
         }
     ])
     .controller('OrganizationController', [
-        '$scope', '$location', '$window', 'OrganizationServices', '$stateParams', function($scope, $location, $window, organizationServices, $stateParams) {
+        '$scope', '$location', '$window', 'OrganizationServices', '$stateParams', function($scope, $location, $window, OrganizationServices, $stateParams) {
 
             $scope.goToLoadingPage = function() {
                 $location.path('/loading');
@@ -96,7 +96,7 @@ angular.module('app.controllers', [])
 
             $scope.getOrganizationsForLoggedUser = function() {
 
-                organizationServices
+                OrganizationServices
                     .getOrganizationsForLoggedUser()
                     .success(function(data, status, headers, config) {
                         $scope.organizations = data;
@@ -112,7 +112,7 @@ angular.module('app.controllers', [])
             $scope.CreateOrganizationsForLoggedUser = function() {
                 //$scope.goToLoadingPage();
 
-                organizationServices
+                OrganizationServices
                     .createOrganizationsForLoggedUser($scope.NewOrganizationModel)
                     .success(function(data, status, headers, config) {
                         console.log(data);
@@ -129,10 +129,10 @@ angular.module('app.controllers', [])
             };
 
             $scope.DeleteOrganization = function (idOrganization) {
-                $scope.OrganizationArchiveModel.Id = idOrganization;
+                //$scope.OrganizationArchiveModel.Id = idOrganization;
                 console.log($scope.OrganizationArchiveModel);
-                organizationServices
-                    .deleteOrganization($scope.OrganizationArchiveModel)
+                OrganizationServices
+                    .deleteOrganization(idOrganization)
                     .success(function (data) {
                         console.log(data);
                         $scope.getOrganizationsForLoggedUser();
@@ -146,11 +146,8 @@ angular.module('app.controllers', [])
                 
             };
 
-            if ($scope.boardDetailId > 0) {
-                //get board details
-            } else {
-                $scope.getOrganizationsForLoggedUser();
-            }
+            
+            $scope.getOrganizationsForLoggedUser();
 
 
             $scope.$on('$viewContentLoaded', function() {
