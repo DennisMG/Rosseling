@@ -11,6 +11,7 @@ using FizzWare.NBuilder;
 using MiniTrello.Api.Models;
 using MiniTrello.Domain.Entities;
 using MiniTrello.Domain.Services;
+using MiniTrello.Api.Controllers;
 
 namespace MiniTrello.Api.Controllers
 {
@@ -50,7 +51,19 @@ namespace MiniTrello.Api.Controllers
             var session = NewValidSession(Token);
             ValidateSession(session);
             var board = _readOnlyRepository.GetById<Board>(IdBoard);
-            var mappedLaneModelList = _mappingEngine.Map<IEnumerable<Lane>, IEnumerable<LaneModel>>(board.Lanes).ToList();
+            List<LaneModel> mappedLaneModelList = _mappingEngine.Map<IEnumerable<Lane>, IEnumerable<LaneModel>>(board.Lanes).ToList();
+            var controller = new CardController(_writeOnlyRepository, _readOnlyRepository, _mappingEngine);
+            foreach (var lane in mappedLaneModelList)
+            {
+                
+                //lane.Cards.Insert(0, new CardModel { Id = 0, Content = "Card" });
+                lane.Cards = controller.GetAllForUser(Token, lane.Id);
+
+                //lane.
+                //List<CardModel> cards = _mappingEngine.Map<IEnumerable<Card>, IEnumerable<CardModel>>(lane.Cards).ToList();
+
+            }
+            
             return mappedLaneModelList;
             //var lanes = Builder<LaneModel>.CreateListOfSize(10).Build().ToList();
             //return lanes;

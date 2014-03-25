@@ -74,15 +74,15 @@ namespace MiniTrello.Api.Controllers
         }
 
         [GET("getcards/{IdLane}/{Token}")]
-        public List<CardModel> GetAllForUser(string Token, int IdLane)
+        public List<CardModel> GetAllForUser(string Token, long IdLane)
         {
             var session = NewValidSession(Token);
             ValidateSession(session);
             var lane = _readOnlyRepository.GetById<Lane>(IdLane);
-            //var mappedOrganizationModelList = _mappingEngine.Map<IEnumerable<Card>, IEnumerable<CardModel>>(lane.Cards).ToList();
-            //return mappedOrganizationModelList;
-            var boards = Builder<CardModel>.CreateListOfSize(10).Build().ToList();
-            return boards;
+            //var mappedCardModelList = _mappingEngine.Map<IEnumerable<Card>, IEnumerable<CardModel>>(lane.Cards).ToList();
+            //return mappedCardModelList;
+            var cards = Builder<CardModel>.CreateListOfSize(10).Build().ToList();
+            return cards;
         }
 
         public Sessions NewValidSession(string token)
