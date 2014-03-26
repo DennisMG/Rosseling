@@ -20,6 +20,10 @@ angular.module('app.services').factory('LaneServices', ['$http', '$window', func
         return $http.get(baseUrl + '/getcards/' + LaneId + '/' + $window.sessionStorage.token);
     };
 
+    lane.deleteCardsForLane = function (LaneId) {
+        return $http.get(baseUrl + '/deletelane/' + LaneId + '/' + $window.sessionStorage.token);
+    };
+
     return lane;
 
 }]);

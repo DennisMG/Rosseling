@@ -10,6 +10,7 @@ namespace MiniTrello.Api.Models
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public List<CardModel> Cards { get; set; } 
+        public List<CardModel> Cards { get; set; }
+        public bool IsArchived { get; set; }
     }
 }

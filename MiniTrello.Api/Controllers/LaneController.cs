@@ -58,16 +58,33 @@ namespace MiniTrello.Api.Controllers
                 
                 //lane.Cards.Insert(0, new CardModel { Id = 0, Content = "Card" });
                 lane.Cards = controller.GetAllForUser(Token, lane.Id);
+                /*foreach (var card in lane.Cards)
+                {
+                    
+                }*/
 
                 //lane.
                 //List<CardModel> cards = _mappingEngine.Map<IEnumerable<Card>, IEnumerable<CardModel>>(lane.Cards).ToList();
 
             }
             
-            return mappedLaneModelList;
+            //return mappedLaneModelList;
+            return mappedLaneModelList.Where(lane => !lane.IsArchived).ToList();
             //var lanes = Builder<LaneModel>.CreateListOfSize(10).Build().ToList();
             //return lanes;
             
+        }
+
+        [AcceptVerbs(new[] { "DELETE" })]
+        [DELETE("deletelane/{laneId}/{Token}")]
+        public LaneModel Archive(string Token, long laneId)
+        {
+            var session = NewValidSession(Token);
+            ValidateSession(session);
+            var lane = _readOnlyRepository.GetById<Lane>(laneId);
+            
+            var archivedBoard = _writeOnlyRepository.Archive(lane);
+            return _mappingEngine.Map<Lane, LaneModel>(archivedBoard);
         }
 
         private void ValidateSession(Sessions session)

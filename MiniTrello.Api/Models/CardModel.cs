@@ -9,5 +9,6 @@ namespace MiniTrello.Api.Models
     {
         public long Id { get; set; }
         public string Content { get; set; }
+        public bool IsArchived { get; set; }
     }
 }

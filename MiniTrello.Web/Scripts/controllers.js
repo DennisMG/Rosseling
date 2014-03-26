@@ -198,8 +198,9 @@ angular.module('app.controllers', [])
                 //$scope.goToLoadingPage();
                 LaneServices.createLanesForLoggedUser($scope.NewLaneModel, $scope.boardId)
                 .success(function (data, status, headers, config) {
-                    $scope.getLanesForLoggedUser();
-                    console.log(data);
+                    //$scope.getLanesForLoggedUser();
+                        $scope.lanes.push(data);
+                        console.log(data);
                     //$location.path('/lane/' + $scope.boardId);
 
 
@@ -220,6 +221,25 @@ angular.module('app.controllers', [])
                     })
                     .error(function (data, status, headers, config) {
                         console.log(data);
+                    });
+
+            };
+
+            $scope.DeleteLane = function (idLane) {
+                //$scope.OrganizationArchiveModel.Id = idOrganization;
+                //console.log($scope.OrganizationArchiveModel);
+                LaneServices
+                    .deleteLane(idLane)
+                    .success(function (data) {
+                        console.log(data);
+                        $scope.getBoards();
+                        //$scope.organizations.pop(data);
+
+
+                    })
+                    .error(function (data, status, headers, config) {
+                        console.log(data);
+
                     });
 
             };
