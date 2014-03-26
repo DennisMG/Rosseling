@@ -17,7 +17,7 @@ angular.module('app.services').factory('BoardServices', ['$http', '$window', fun
     };
 
     board.deleteBoard = function ( IdBoard) {
-        return $http.delete(baseUrl + '/deleteboard/' + IdBoard + '/' + $window.sessionStorage.token, data);
+        return $http.delete(baseUrl + '/deleteboard/' + IdBoard + '/' + $window.sessionStorage.token);
     };
 
     return board;

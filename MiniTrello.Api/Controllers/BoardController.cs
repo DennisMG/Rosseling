@@ -102,7 +102,8 @@ namespace MiniTrello.Api.Controllers
              var session = NewValidSession(Token);
              var organization = _readOnlyRepository.GetById<Organization>(IdOrganization);
              var mappedOrganizationModelList = _mappingEngine.Map<IEnumerable<Board>,IEnumerable<AccountBoardModel>> (organization.Boards).ToList();
-             return mappedOrganizationModelList;
+             //return mappedOrganizationModelList;
+             return mappedOrganizationModelList.Where(board => !board.IsArchived).ToList();
              //var boards = Builder<AccountBoardModel>.CreateListOfSize(10).Build().ToList();
              //return boards;
          }
