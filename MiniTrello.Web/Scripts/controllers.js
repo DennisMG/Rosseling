@@ -110,23 +110,28 @@ angular.module('app.controllers', [])
             };
 
             $scope.CreateOrganizationsForLoggedUser = function() {
-                //$scope.goToLoadingPage();
+               
 
                 OrganizationServices
                     .createOrganizationsForLoggedUser($scope.NewOrganizationModel)
-                    .success(function(data, status, headers, config) {
+                    .success(function (data, status, headers, config) {
+                        
                         console.log(data);
-                        $scope.getOrganizationsForLoggedUser();
-                        //$scope.$apply()
-                        //$location.path('/organizations');
+                        $scope.organizations.push(data);
+                        //$scope.getOrganizationsForLoggedUser();
+                       
+                        
 
                     })
                     .error(function(data, status, headers, config) {
                         console.log(data);
-                        //$location.path('/createorganization');
+                        
                     });
 
             };
+            
+
+            
 
             $scope.DeleteOrganization = function (idOrganization) {
                 //$scope.OrganizationArchiveModel.Id = idOrganization;
@@ -136,7 +141,8 @@ angular.module('app.controllers', [])
                     .success(function (data) {
                         console.log(data);
                         $scope.getOrganizationsForLoggedUser();
-                        
+                        //$scope.organizations.pop(data);
+
 
                     })
                     .error(function (data, status, headers, config) {

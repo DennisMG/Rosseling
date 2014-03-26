@@ -55,7 +55,7 @@ namespace MiniTrello.Api.Controllers
             session.User.AddOrganization(newOrganization);
             var organizationCreated = _writeOnlyRepository.Create(newOrganization);
 
-            return new OrganizationModel{Description = organizationCreated.Description,Name = organizationCreated.Name};
+            return new OrganizationModel{Description = organizationCreated.Description,Name = organizationCreated.Name, Id = organizationCreated.Id};
         }
 
         [GET("organizations/{Token}")]
