@@ -232,7 +232,7 @@ angular.module('app.controllers', [])
                     .deleteLane(idLane)
                     .success(function (data) {
                         console.log(data);
-                        $scope.getBoards();
+                        $scope.getLanesForLoggedUser();
                         //$scope.organizations.pop(data);
 
 
