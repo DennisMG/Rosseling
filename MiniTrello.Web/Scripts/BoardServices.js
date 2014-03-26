@@ -16,6 +16,10 @@ angular.module('app.services').factory('BoardServices', ['$http', '$window', fun
         return $http.post(baseUrl + '/createBoard/' + IdOrganization + '/' + $window.sessionStorage.token,data);
     };
 
+    board.deleteBoard = function ( IdBoard) {
+        return $http.delete(baseUrl + '/deleteboard/' + IdBoard + '/' + $window.sessionStorage.token, data);
+    };
+
     return board;
 
 }]);

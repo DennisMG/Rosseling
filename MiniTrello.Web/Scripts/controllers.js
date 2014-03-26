@@ -50,6 +50,25 @@ angular.module('app.controllers', [])
                 //$location.path('/');
             };
 
+            $scope.DeleteBoard = function (idBoard) {
+                //$scope.OrganizationArchiveModel.Id = idOrganization;
+                console.log($scope.OrganizationArchiveModel);
+                BoardServices
+                    .deleteBoard(idBoard)
+                    .success(function (data) {
+                        console.log(data);
+                        $scope.getBoards();
+                        //$scope.organizations.pop(data);
+
+
+                    })
+                    .error(function (data, status, headers, config) {
+                        console.log(data);
+
+                    });
+
+            };
+
             $scope.CreateBoard = function() {
                // $location.path('/loading');
                 console.log($scope.NewBoardModel);
@@ -58,7 +77,8 @@ angular.module('app.controllers', [])
                     .createBoardsForLoggedUser($scope.NewBoardModel, $scope.organizationID)
                     .success(function(data, status, headers, config) {
                         console.log($scope.NewBoardModel);
-                        $scope.getBoards();
+                        $scope.boards.push(data);
+                        //$scope.getBoards();
                         //$location.path('/boards/' + $scope.organizationID);
 
                     })
@@ -88,7 +108,7 @@ angular.module('app.controllers', [])
 
             
             $scope.boardDetailId = $stateParams.boardId;
-            console.log($scope.boardDetailId);
+            //console.log($scope.boardDetailId);
             $scope.NewOrganizationModel = { Name: '', Description: '' };
             $scope.OrganizationArchiveModel = { Id: 0 };
 
