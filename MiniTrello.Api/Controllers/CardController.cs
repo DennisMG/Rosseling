@@ -79,11 +79,11 @@ namespace MiniTrello.Api.Controllers
             var session = NewValidSession(Token);
             ValidateSession(session);
             var lane = _readOnlyRepository.GetById<Lane>(IdLane);
-            var mappedCardModelList = _mappingEngine.Map<IEnumerable<Card>, IEnumerable<CardModel>>(lane.Cards).ToList();
-            return mappedCardModelList.Where(card => !card.IsArchived).ToList();
+            //var mappedCardModelList = _mappingEngine.Map<IEnumerable<Card>, IEnumerable<CardModel>>(lane.Cards).ToList();
+            //return mappedCardModelList.Where(card => !card.IsArchived).ToList();
             //return mappedCardModelList;
-            //var cards = Builder<CardModel>.CreateListOfSize(10).Build().ToList();
-            //return cards;
+            var cards = Builder<CardModel>.CreateListOfSize(10).Build().ToList();
+            return cards;
         }
 
         public Sessions NewValidSession(string token)
