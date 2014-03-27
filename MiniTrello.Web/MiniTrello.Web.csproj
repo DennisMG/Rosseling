@@ -145,6 +145,8 @@
       <DependentUpon>app.less</DependentUpon>
     </Content>
     <Content Include="Content\app.less" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="Content\variables.less" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\AccountServices.js" />
@@ -169,6 +171,8 @@
     <Content Include="Scripts\services.spec.js">
       <DependentUpon>services.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\vendor\angular-csp.css" />
     <Content Include="Scripts\vendor\angular-ui-router.js" />
     <Content Include="Scripts\vendor\angular-ui-router.min.js" />
@@ -490,6 +494,8 @@
     <Content Include="Content\bootstrap\bootstrap.less" />
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Scripts\toastr.min.js.map" />
+    <Content Include="Content\toastr.less" />
     <None Include="Scripts\vendor\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\vendor\jquery-2.0.3.js" />
     <Content Include="Scripts\vendor\jquery-2.0.3.min.js" />
@@ -521,6 +527,7 @@
     <Content Include="Views\CreateOrganizationView.cshtml" />
     <Content Include="Views\CreateNewBoardView.cshtml" />
     <Content Include="Views\LaneView.cshtml" />
+    <Content Include="Views\UpdateAccountView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

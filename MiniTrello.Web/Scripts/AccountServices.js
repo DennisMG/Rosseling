@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module('app.services', []).factory('AccountServices', ['$http', function ($http) {
+angular.module('app.services', []).factory('AccountServices', ['$http', '$window', function ($http,$window) {
 
     var account = {};
 
@@ -18,6 +18,14 @@ angular.module('app.services', []).factory('AccountServices', ['$http', function
 
     account.forgotPassword = function (token,data) {
         return $http.post('http://minitrelloapidm.apphb.com/forgotpassword/' + token, data);
+    };
+
+    account.updateAccount = function ( data) {
+        return $http.post('http://minitrelloapidm.apphb.com/updateaccount/' + $window.sessionStorage.token, data);
+    };
+
+    account.getAccount = function () {
+        return $http.get('http://minitrelloapidm.apphb.com/getaccount/' + $window.sessionStorage.token);
     };
 
     return account;

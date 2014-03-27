@@ -198,15 +198,13 @@ angular.module('app.controllers', [])
                 //$scope.goToLoadingPage();
                 LaneServices.createLanesForLoggedUser($scope.NewLaneModel, $scope.boardId)
                 .success(function (data, status, headers, config) {
-                    //$scope.getLanesForLoggedUser();
                         $scope.lanes.push(data);
-                        console.log(data);
-                    //$location.path('/lane/' + $scope.boardId);
+                        toastr.success("", "New Lane Created");
 
 
                 })
                     .error(function (data, status, headers, config) {
-                        console.log(data);
+                        toastr.error("Failed to create Lane", "Error");
                         $location.path('/lane/' + $scope.boardId);
                     });
             };
@@ -216,7 +214,7 @@ angular.module('app.controllers', [])
                     .getLanesForLoggedUser($scope.boardId)
                     .success(function (data, status, headers, config) {
                         $scope.lanes = data;
-                        console.log(data);
+                        
 
                     })
                     .error(function (data, status, headers, config) {
@@ -226,19 +224,17 @@ angular.module('app.controllers', [])
             };
 
             $scope.DeleteLane = function (idLane) {
-                //$scope.OrganizationArchiveModel.Id = idOrganization;
-                //console.log($scope.OrganizationArchiveModel);
                 LaneServices
                     .deleteLane(idLane)
                     .success(function (data) {
-                        console.log(data);
+                        
                         $scope.getLanesForLoggedUser();
-                        //$scope.organizations.pop(data);
-
+                        toastr.success("", "Lane Deleted");
 
                     })
                     .error(function (data, status, headers, config) {
                         console.log(data);
+                        toastr.error("Failed deleting Lane", "Error");
 
                     });
 
@@ -256,7 +252,7 @@ angular.module('app.controllers', [])
 
             $scope.hasError = false;
             $scope.errorMessage = '';
-
+            $scope.UpdateAccountModel = {FirstName:'',LastName:'',Email:''};
 
             $scope.isLogged = function() {
                 return $window.sessionStorage.token != null;
@@ -268,6 +264,34 @@ angular.module('app.controllers', [])
             $scope.AccountForgotPasswordModel = { Email: '', NewPassword: '', ConfirmNewPassword: '' };
             $scope.UserName = '';
 
+            $scope.UpdateAccount = function() {
+                AccountServices.updateAccount($scope.UpdateAccountModel)
+                .success(function(data) {
+                        
+                        toastr.success("", "Account Updated");
+                    })
+                    .error(function (data) {
+                        toastr.error("Failed Updating account data", "Error");
+
+                    console.log(data);
+
+                });
+            };
+
+            $scope.GetAccount = function () {
+                AccountServices
+                    .getAccount()
+                    .success(function (data) {
+                        $scope.UpdateAccountModel = data;
+
+                    })
+                    .error(function (data) {
+                        console.log(data);
+                        toastr.error("", "Failed to retrieve data for this user.");
+
+                    });
+            };
+
             $scope.logout = function() {
                 delete $window.sessionStorage.token;
 
@@ -275,30 +299,39 @@ angular.module('app.controllers', [])
 
             $scope.login = function() {
 
-                $scope.goToLoadingPage();
-                console.log($scope.loginModel);
-
                 AccountServices
                     .login($scope.loginModel)
-                    .success(function(data, status, headers, config) {
-                        $scope.goToLoadingPage();
+                    .success(function (data, status, headers, config) {
+                       
+                        toastr.success("", "Bienvenido a MiniTrello",
+                                {
+                                    "positionClass": "toast-top-full-width",
+                                    "showEasing": "swing",
+                                    "hideEasing": "swing",
+                                    "timeOut": "1000",
+                                    "showMethod": "slideDown",
+                                    "hideMethod": "fadeOut"
+                                });
+                        
                         $window.sessionStorage.token = data.Token;
                         $scope.UserName = data.Name;
                         console.log($scope.UserName);
                         $location.path('/organizations');
+                        
 
                     })
-                    .error(function(data, status, headers, config) {
-                        // Erase the token if the user fails to log in
+                    .error(function (data, status, headers, config) {
+                        toastr.error("Your Email or Password may be incorrect", "Oops");
+                    
                         delete $window.sessionStorage.token;
                         $scope.goToLogin();
 
                         $scope.errorMessage = 'Error o clave incorrect';
                         $scope.hasError = true;
-                        // Handle login errors here
+                       
                         $scope.message = 'Error: Invalid user or password';
                     });
-                //$location.path('/');
+                
             };
 
             $scope.goToRegister = function() {
@@ -314,19 +347,27 @@ angular.module('app.controllers', [])
             };
 
             $scope.register = function() {
-                $scope.goToLoadingPage();
+               
                 console.log($scope.registerModel);
                 AccountServices
                     .register($scope.registerModel)
                     .success(function(data, status, headers, config) {
-
-                        console.log(data);
-
+                        toastr.success("Now you are part of the MiniTrello Community", "Congratulations");
                         $scope.goToLogin();
 
                     })
                     .error(function(data, status, headers, config) {
-                        console.log(data);
+                        
+                        toastr.error("Something went terribly wrong. We couldn't create your new account :S Please check your Password and Password confirmation and try again", "Oops",
+                            {
+                                
+                                "showEasing": "swing",
+                                "hideEasing": "swing",
+                                "timeOut": "5000",
+                                "showMethod": "slideDown",
+                                "hideMethod": "fadeOut"
+                            });
+                        
                     });
             };
 
@@ -362,6 +403,8 @@ angular.module('app.controllers', [])
                         console.log(data);
                     });
             };
+
+            $scope.GetAccount();
 
 
             $scope.$on('$viewContentLoaded', function() {

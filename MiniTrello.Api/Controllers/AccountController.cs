@@ -194,6 +194,16 @@ namespace MiniTrello.Api.Controllers
 
         }
 
+        [GET("getaccount/{Token}")]
+        public UpdateAccountModel getAccount( string Token)
+        {
+            var session = _readOnlyRepository.First<Sessions>(session1 => session1.Token == Token);
+            ValidateSession(session);
+            return new UpdateAccountModel { Email = session.User.Email, FirstName = session.User.FirstName, LastName = session.User.LastName };
+
+
+        }
+
         private bool EmailIsValid(string email)
         {
             if (!email.Contains('@') || !email.Contains('.'))
