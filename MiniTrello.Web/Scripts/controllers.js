@@ -31,6 +31,11 @@ angular.module('app.controllers', [])
 
             $scope.organizationID = $stateParams.IdOrganization;
             $scope.NewBoardModel = { Title: '' };
+
+            $scope.IsAllBoards = function() {
+                if ($stateParams.IdOrganization == -1)
+                    return true;
+            };
            
 
             

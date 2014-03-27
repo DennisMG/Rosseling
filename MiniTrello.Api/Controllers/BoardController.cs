@@ -132,7 +132,7 @@ namespace MiniTrello.Api.Controllers
         }
 
        // [AcceptVerbs(new[] {"PUT"})]
-        [POST("boards/{Token}/{BoardId}")]
+        [POST("invitemember/{Token}/{BoardId}")]
         public AccountBoardModel InviteMembertoBoard(string Token, long BoardId, [FromBody] InviteMemberToBoardModel model)
         {
             var session = NewValidSession(Token);
