@@ -200,12 +200,12 @@ angular.module('app.controllers', [])
                 .success(function (data, status, headers, config) {
 
                         console.log(data);
-                    toastr.success("", "New Lane Created");
+                    toastr.success("", "Card Created");
 
 
                 })
                     .error(function (data, status, headers, config) {
-                        toastr.error("Failed to create Lane", "Error");
+                        toastr.error("Failed to create Card", "Error");
                         $location.path('/lane/' + $scope.boardId);
                     });
             };
