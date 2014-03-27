@@ -29,7 +29,7 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
                 url: '/updateaccount',
                 layout: 'basic',
                 templateUrl: '/views/updateaccountview',
-                controller: 'AccountController'
+                controller: 'UpdateAccountController'
             })
 
             .state('changepassword', {

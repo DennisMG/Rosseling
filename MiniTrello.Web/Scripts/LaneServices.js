@@ -24,6 +24,10 @@ angular.module('app.services').factory('LaneServices', ['$http', '$window', func
         return $http.delete(baseUrl + '/deletelane/' + LaneId + '/' + $window.sessionStorage.token);
     };
 
+    lane.AddCard = function(data, LaneId) {
+        return $http.post(baseUrl + '/addcard/' + LaneId + '/' + $window.sessionStorage.token,data);
+    };
+
     return lane;
 
 }]);

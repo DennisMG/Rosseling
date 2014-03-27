@@ -190,9 +190,26 @@ angular.module('app.controllers', [])
             $scope.boardId = $stateParams.IdBoard;
             $scope.NewLaneModel = {Id: '', Name: ''};
             $scope.NewLaneName = { Name: ''};
-
+            $scope.NewCardModel = { Content: '' };
             $scope.lanes = [];
-            //$scope.cards = [];
+
+            $scope.AddCard = function (LaneId) {
+                console.log(LaneId);
+                LaneServices
+                .AddCard($scope.NewCardModel,LaneId)
+                .success(function (data, status, headers, config) {
+
+                        console.log(data);
+                    toastr.success("", "New Lane Created");
+
+
+                })
+                    .error(function (data, status, headers, config) {
+                        toastr.error("Failed to create Lane", "Error");
+                        $location.path('/lane/' + $scope.boardId);
+                    });
+            };
+            
             
             $scope.createLane = function () {
                 //$scope.goToLoadingPage();
@@ -247,6 +264,49 @@ angular.module('app.controllers', [])
             });
         }
     ])
+
+     .controller('UpdateAccountController', [
+        '$scope', '$location', '$window', 'AccountServices', '$stateParams', function ($scope, $location, $window, AccountServices, $stateParams) {
+
+            $scope.GetAccount = function () {
+                AccountServices
+                    .getAccount()
+                    .success(function (data) {
+                        $scope.UpdateAccountModel = data;
+
+                    })
+                    .error(function (data) {
+                        console.log(data);
+
+
+
+
+                    });
+            };
+
+            $scope.UpdateAccount = function () {
+                AccountServices.updateAccount($scope.UpdateAccountModel)
+                .success(function (data) {
+
+                    toastr.success("", "Account Updated");
+                })
+                    .error(function (data) {
+                        toastr.error("Failed Updating account data", "Error");
+
+                        console.log(data);
+
+                    });
+            };
+
+            $scope.GetAccount();
+           
+
+            $scope.$on('$viewContentLoaded', function () {
+                $window.ga('send', 'pageview', { 'page': $location.path(), 'title': $scope.$root.title });
+            });
+        }
+     ])
+
     .controller('AccountController', [
         '$scope', '$location', '$window', 'AccountServices', '$stateParams', function($scope, $location, $window, AccountServices, $stateParams) {
 
@@ -278,7 +338,7 @@ angular.module('app.controllers', [])
                 });
             };
 
-            $scope.GetAccount = function () {
+           /* $scope.GetAccount = function () {
                 AccountServices
                     .getAccount()
                     .success(function (data) {
@@ -287,10 +347,12 @@ angular.module('app.controllers', [])
                     })
                     .error(function (data) {
                         console.log(data);
-                        toastr.error("", "Failed to retrieve data for this user.");
+                        
+                        
+                        
 
                     });
-            };
+            };*/
 
             $scope.logout = function() {
                 delete $window.sessionStorage.token;
@@ -404,7 +466,7 @@ angular.module('app.controllers', [])
                     });
             };
 
-            $scope.GetAccount();
+            //$scope.GetAccount();
 
 
             $scope.$on('$viewContentLoaded', function() {
