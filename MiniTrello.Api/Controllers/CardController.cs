@@ -79,7 +79,7 @@ namespace MiniTrello.Api.Controllers
             var session = NewValidSession(Token);
             ValidateSession(session);
             var lane = _readOnlyRepository.GetById<Lane>(IdLane);
-            var mappedCardModelList = _mappingEngine.Map<IEnumerable<Card>, IEnumerable<CardModel>>(lane.Cards).ToList();
+            var mappedCardModelList = _mappingEngine.Map<IEnumerable<Card>, IEnumerable<CardModel>>(lane.Cards);
             List<CardModel> Lista = mappedCardModelList.Where(card => !card.IsArchived).ToList();
             return Lista;
             //return mappedCardModelList;
