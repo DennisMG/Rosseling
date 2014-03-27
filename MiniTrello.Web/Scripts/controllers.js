@@ -190,7 +190,7 @@ angular.module('app.controllers', [])
             $scope.boardId = $stateParams.IdBoard;
             $scope.NewLaneModel = {Id: '', Name: ''};
             $scope.NewLaneName = { Name: ''};
-            $scope.NewCardModel = { Content: '' };
+            $scope.NewCardModel = { Content: ''};
             $scope.lanes = [];
 
             $scope.AddCard = function (LaneId) {
@@ -198,9 +198,10 @@ angular.module('app.controllers', [])
                 LaneServices
                 .AddCard($scope.NewCardModel,LaneId)
                 .success(function (data, status, headers, config) {
-
+                    $scope.getLanesForLoggedUser();
                         console.log(data);
-                    toastr.success("", "Card Created");
+                        toastr.success("", "Card Created");
+                       
 
 
                 })
@@ -209,11 +210,25 @@ angular.module('app.controllers', [])
                         $location.path('/lane/' + $scope.boardId);
                     });
             };
-            
+
+            $scope.deleteCard = function(CardId) {
+                LaneServices.deleteCard(CardId)
+                .success(function (data, status, headers, config) {
+                    $scope.getLanesForLoggedUser();
+                    console.log(data);
+                    toastr.success("", "Card Deleted");
+                    $scope.getLanesForLoggedUser();
+
+
+                    })
+                    .error(function (data, status, headers, config) {
+                        toastr.error("Failed to delete Card", "Error");
+                        //$location.path('/lane/' + $scope.boardId);
+                    });
+            };
             
             $scope.createLane = function () {
-                //$scope.goToLoadingPage();
-                LaneServices.createLanesForLoggedUser($scope.NewLaneModel, $scope.boardId)
+               LaneServices.createLanesForLoggedUser($scope.NewLaneModel, $scope.boardId)
                 .success(function (data, status, headers, config) {
                         $scope.lanes.push(data);
                         toastr.success("", "New Lane Created");
@@ -225,6 +240,7 @@ angular.module('app.controllers', [])
                         $location.path('/lane/' + $scope.boardId);
                     });
             };
+
             $scope.getLanesForLoggedUser = function () {
                 
                 LaneServices

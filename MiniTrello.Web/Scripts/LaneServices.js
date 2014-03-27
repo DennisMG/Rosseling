@@ -28,6 +28,10 @@ angular.module('app.services').factory('LaneServices', ['$http', '$window', func
         return $http.post(baseUrl + '/addcard/' + LaneId + '/' + $window.sessionStorage.token,data);
     };
 
+    lane.deleteCard = function (CardId) {
+        return $http.delete(baseUrl + '/card/' + CardId + '/' + $window.sessionStorage.token);
+    };
+
     return lane;
 
 }]);

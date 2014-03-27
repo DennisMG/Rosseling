@@ -42,13 +42,13 @@ namespace MiniTrello.Api.Controllers
         }
 
         [AcceptVerbs(new[] { "DELETE" })]
-        [DELETE("card/{BoardId}/{Token}")]
-        public CardArchiveModel Archive(long BoardId,string Token, [FromBody] CardArchiveModel model)
+        [DELETE("card/{CardId}/{Token}")]
+        public CardArchiveModel Archive(long CardId,string Token)
         {
             var session = NewValidSession(Token);
-            var board = _readOnlyRepository.GetById<Board>(BoardId);
-            VerifyAdministrator(board.Administrator, session.User);
-            var card = _readOnlyRepository.GetById<Card>(model.Id);
+            var card = _readOnlyRepository.GetById<Card>(CardId);
+            //VerifyAdministrator(board.Administrator, session.User);
+            //var card = _readOnlyRepository.GetById<Card>(model.Id);
             if (card == null)
                 throw new BadRequestException("Failed to find card");
             card.IsArchived = true;

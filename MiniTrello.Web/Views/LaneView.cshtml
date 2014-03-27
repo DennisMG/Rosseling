@@ -37,7 +37,7 @@
                 <ul class="list-group" ng-repeat="card in lane.Cards">
                     <a href="#" class="list-group-item">{{card.Content}}
                         <div align="right">
-                            <button type="submit" text-align="left" class="btn btn-default right" ng-click="">Erase Card</button>
+                            <button type="submit" text-align="left" class="btn btn-default right" ng-click="deleteCard(card.Id)">Erase Card</button>
                         </div>
                     </a>
                     
@@ -47,7 +47,7 @@
             <form class="form-inline" role="form">
                 <button  type="submit" class="btn btn-default right" ng-click="AddCard(lane.Id)">Add Card</button>
                 <div class="form-group">
-                    <input ng-mode="NewCardModel.Content" type="text" class="form-control" id="card_name" placeholder="Add text here"></div>
+                    <input ng-model="NewCardModel.Content" type="text" class="form-control" id="card_name" placeholder="Add text here"></div>
 
             </form><br><br>
         </div>
