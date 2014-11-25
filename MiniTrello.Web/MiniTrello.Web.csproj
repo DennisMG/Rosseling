@@ -514,20 +514,13 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Login.cshtml" />
     <Content Include="Views\Index.cshtml" />
     <Content Include="Views\404.cshtml" />
     <Content Include="Views\_Layout.cshtml" />
     <Content Include="Views\_PageStart.cshtml" />
-    <Content Include="Views\ChangePassword.cshtml" />
-    <Content Include="Views\LoadingPage.cshtml" />
-    <Content Include="Views\boards.cshtml" />
-    <Content Include="Views\Organizations.cshtml" />
-    <Content Include="Views\ForgotPasswordView.cshtml" />
     <Content Include="Views\CreateOrganizationView.cshtml" />
     <Content Include="Views\CreateNewBoardView.cshtml" />
     <Content Include="Views\LaneView.cshtml" />
-    <Content Include="Views\UpdateAccountView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
