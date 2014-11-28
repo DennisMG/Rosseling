@@ -149,6 +149,13 @@
     <Content Include="Content\toastr.min.css" />
     <Content Include="Content\variables.less" />
     <Content Include="Global.asax" />
+    <Content Include="Images\lápices-flexibles-divertidos-coloridos-11197661.jpg" />
+    <Content Include="Images\pen1.jpg" />
+    <Content Include="Images\SELF-PEN.jpg" />
+    <Content Include="Images\usb1.jpg" />
+    <Content Include="Images\usb3.jpg" />
+    <Content Include="Images\usb2.jpg" />
+    <Content Include="Images\logotipo.png" />
     <Content Include="Scripts\AccountServices.js" />
     <Content Include="Scripts\BoardServices.js" />
     <Content Include="Scripts\bootstrap-collapse.js" />
@@ -541,7 +548,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
     <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

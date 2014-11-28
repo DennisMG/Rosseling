@@ -3,10 +3,35 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title ng-bind="title">@(PageData["title"] ?? "MiniTrello")</title>
-    <meta name="description" content="@PageData["description"]">
+    <title ng-bind="title">@(PageData["title"] ?? "Rodriguez Access")</title>
+    <meta name="description" content="@PageData["Producto"]">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     @Styles.Render("~/content/css/app")
+    
+    <div class="navbar navbar-fixed-top navbar-inverse">
+        <div class="navbar-inner">
+            <div class="container">
+                <ul class="nav">
+                    <li>
+                        <a href="/">
+                            Inicio
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Views/CreateNewBoardView.cshtml">
+                            Acerca de nosotros
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Views/LaneView.cshtml">
+                            Contactanos
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
     
     
     
