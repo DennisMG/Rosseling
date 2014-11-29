@@ -149,7 +149,10 @@
     <Content Include="Content\toastr.min.css" />
     <Content Include="Content\variables.less" />
     <Content Include="Global.asax" />
-    <Content Include="Images\lápices-flexibles-divertidos-coloridos-11197661.jpg" />
+    <Content Include="Images\direccion1.jpg" />
+    <Content Include="Images\DIRECCION2.jpg" />
+    <Content Include="Images\EMPRENDEDURISMO.jpg" />
+    <Content Include="Images\pen2.jpg" />
     <Content Include="Images\pen1.jpg" />
     <Content Include="Images\SELF-PEN.jpg" />
     <Content Include="Images\usb1.jpg" />
@@ -525,9 +528,9 @@
     <Content Include="Views\404.cshtml" />
     <Content Include="Views\_Layout.cshtml" />
     <Content Include="Views\_PageStart.cshtml" />
-    <Content Include="Views\CreateOrganizationView.cshtml" />
-    <Content Include="Views\CreateNewBoardView.cshtml" />
-    <Content Include="Views\LaneView.cshtml" />
+    <Content Include="Views\ProductosyServicios.cshtml" />
+    <Content Include="Views\Contactanos.cshtml" />
+    <Content Include="Views\AcercaDeNosotros.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

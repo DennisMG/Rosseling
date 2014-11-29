@@ -18,24 +18,24 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
 
             })
             
-            .state('login', {
-                url: '/login',
+            .state('acercadenosotros', {
+                url: '/acercadenosotros',
                 layout: 'basic',
-                templateUrl: '/views/index',
+                templateUrl: '/views/AcercaDeNosotros.cshtml',
                 controller: 'AccountController'
             })
 
-            .state('updateaccount', {
-                url: '/updateaccount',
+            .state('contactanos', {
+                url: '/contactanos',
                 layout: 'basic',
-                templateUrl: '/views/updateaccountview',
+                templateUrl: '/views/Contactanos',
                 controller: 'UpdateAccountController'
             })
 
-            .state('changepassword', {
-                url: '/changepassword',
+            .state('productosyservicios', {
+                url: '/productosyservicios',
                 layout: 'basic',
-                templateUrl: '/views/changepassword',
+                templateUrl: '/views/ProductosyServicios',
                 controller: 'AccountController'
             })
 
@@ -60,19 +60,9 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
                 controller: 'BoardController'
             })
 
-            .state('lane', {
-                url: '/lane/:IdBoard',
-                layout: 'basic',
-                templateUrl: '/views/laneview',
-                controller: 'LaneController'
-            })
+            
 
-            .state('forgotpassword', {
-                url: '/forgotpassword/:Token',
-                layout: 'basic',
-                templateUrl: '/views/forgotpasswordview',
-                controller: 'AccountController'
-            })
+            
 
             .state('organizations', {
                 url: '/organizations',
@@ -81,12 +71,7 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
                 controller: 'OrganizationController'
             })
 
-            .state('loadingpage', {
-                url: '/loading',
-                layout: 'basic',
-                templateUrl: '/views/loadingpage',
-                controller: 'AccountController'
-            })
+            
 
             .state('otherwise', {
                 url: '*path',
